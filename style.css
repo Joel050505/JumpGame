@@ -1,0 +1,359 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Press Start 2P", monospace;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -2440px 0; /* Adjust this value to control the speed */
+  }
+}
+
+body {
+  /* background: linear-gradient(to top, #ffb6c1, #ffa07a, #8a2be2); */
+  background: linear-gradient(to top, #87ceeb, #00bfff, #4682b4);
+  background: url("pictures/10.png") repeat-x;
+  height: 100vh;
+  background-size: cover;
+  margin: 0;
+  animation: moveBackground 25s linear infinite;
+}
+
+#road {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, #333 60%, #444 90%, #999 100%);
+  height: 200px;
+}
+
+#dirt {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  color: brown;
+  bottom: 0;
+}
+
+#cloud1,
+#cloud2,
+#cloud3,
+#cloud4 {
+  position: absolute;
+  animation: moveBackground 20s linear infinite;
+}
+
+#cloud1 {
+  left: 55%;
+  width: 200px;
+}
+
+#cloud2 {
+  left: 25%;
+  top: 50px;
+  width: 500px;
+}
+
+#cloud3 {
+  left: 100px;
+  width: 300px;
+}
+
+#cloud4 {
+  right: 100px;
+  width: 300px;
+}
+
+#sprite {
+  position: absolute;
+  bottom: 195px;
+  left: 300px;
+}
+
+#robo-sam {
+  display: none;
+}
+#willie {
+  display: inline-block;
+}
+#zig-zane {
+  display: none;
+}
+
+.jump {
+  animation: jump 1s linear;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(-120px);
+  }
+  30% {
+    transform: translateY(-200px);
+  }
+  70% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+#obstacle {
+  position: absolute;
+  left: 90%;
+  bottom: 190px;
+}
+
+.resetPos {
+  left: 90%;
+}
+
+.animation {
+  animation: fromLeftToRight 2s linear infinite;
+}
+
+@keyframes fromLeftToRight {
+  0% {
+    right: 0;
+  }
+  100% {
+    left: -100px;
+  }
+}
+
+#scoreBar {
+  display: flex;
+  position: absolute;
+  color: yellow;
+  text-shadow: 2px 2px 0 #000, /* Black shadow for depth */ 4px 4px 0 #555;
+  border-radius: 4px;
+  padding: 20px;
+  font-size: 25px;
+  font-family: "Press Start 2P", cursive;
+  text-align: center;
+}
+
+.playAgainMenu {
+  font-family: "Press Start 2P", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgba(176, 196, 222, 0.5); */
+  /* background-color: burlywood; */
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 700px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 25px;
+}
+
+h1 {
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
+}
+
+h2 {
+  color: black;
+  text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
+}
+.displayNone {
+  display: none;
+}
+
+.active {
+  display: flex;
+}
+
+.box1 {
+  display: flex;
+}
+.box1 p {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 0 black, 4px 4px 0 #555;
+}
+
+.box2 {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+#playAgainBtn {
+  padding: 20px;
+  border: 2px solid lightseagreen;
+  background-color: lightseagreen;
+  cursor: pointer;
+  border-radius: 25px;
+  width: 250px;
+  font-size: 20px;
+  font-family: "Press Start 2P", cursive;
+  text-align: center;
+  margin: 20px;
+  text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
+  transition: all ease-in-out 0.4s;
+}
+
+#playAgainBtn:hover {
+  color: white;
+  text-shadow: 2px 2px 0 black, 4px 4px 0 #555;
+  transition: all ease-in-out 0.4s;
+}
+
+/* First page menu */
+#container {
+  flex-direction: column;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  animation: firstPageMenu 6s linear infinite;
+}
+
+@keyframes firstPageMenu {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+h3 {
+  font-size: 40px;
+  letter-spacing: 2px;
+  color: #ffcc00;
+  text-shadow: 2px 2px 0 #000, /* Black shadow for depth */ 4px 4px 0 #555;
+  margin: 40px;
+}
+
+.btn {
+  background-color: burlywood;
+  margin: 20px;
+  border: 2px double burlywood;
+  border-radius: 100px;
+  padding: 18px;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  font-family: "Press Start 2P", cursive;
+  text-align: center;
+  transition: all ease-in-out 0.2s;
+}
+
+.btn:hover {
+  transition: all ease-in-out 0.2s;
+  opacity: 0.9;
+  color: black;
+  text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
+}
+
+#info-btn,
+#play-btn {
+  width: 120px;
+}
+
+#characters-btn {
+  width: 250px;
+  background-color: lightseagreen;
+  border: 2px solid lightseagreen;
+}
+
+#character-container {
+  position: absolute;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  top: 25%;
+  cursor: pointer;
+  animation: firstPageMenu 20s linear infinite;
+}
+#boxframe {
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+}
+.character-box {
+  width: 200px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-family: "Press Start 2P", monospace;
+  text-align: center;
+  color: black;
+  text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
+  transition: all ease-in-out 0.3s;
+}
+.character-box p {
+  margin: 10px;
+}
+.character-box:hover {
+  background-color: rgb(172, 135, 86);
+  color: black;
+  transition: all ease-in-out 0.3s;
+  transform: scale(1.05);
+}
+
+.character-one {
+  background-color: burlywood;
+}
+
+.character-two {
+  background-color: burlywood;
+}
+
+.character-three {
+  background-color: burlywood;
+}
+
+#p {
+  text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
+  font-size: 30px;
+  font-family: "Press Start 2P", monospace;
+  padding: 20px;
+}
+
+#back-to-start-menu-button {
+  padding: 20px;
+  width: 150px;
+  border-radius: 20px;
+  border: 2px solid lightseagreen;
+  background-color: lightseagreen;
+  font-family: "Press Start 2P", monospace;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 0 black, 4px 4px 0 #555;
+  transition: all ease-in-out 0.4s;
+}
+
+#back-to-start-menu-button:hover {
+  transition: all ease-in-out 0.4s;
+  color: black;
+  text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
+}
+
+#paus-box {
+  display: flex;
+  position: absolute;
+  font-size: 60px;
+  font-family: "Press Start 2P", monospace;
+  right: 0;
+  color: black;
+  margin: 20px;
+  cursor: pointer;
+}
