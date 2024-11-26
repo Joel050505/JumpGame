@@ -30,90 +30,147 @@
       id="new-high-score"
       src="audio/applause-sound-effect-240470.mp3"
     ></audio>
-    <!-- <img id="cloud1" src="pictures/New Piskel (10).gif" alt="" />
+    <audio
+      id="background-music"
+      src="audio/retro-game-arcade-236133.mp3"
+    ></audio>
+    <div id="game-container">
+      <!-- <img id="cloud1" src="pictures/New Piskel (10).gif" alt="" />
     <img id="cloud2" src="pictures/New Piskel (11).gif" alt="" />
     <img id="cloud3" src="pictures/New Piskel (12).gif" alt="" />
     <img id="cloud4" src="pictures/New Piskel (15).gif" alt="" /> -->
-    <div id="scoreBar">
-      Score:
-      <p id="score">0</p>
-    </div>
-    <div id="sprite">
-      <img
-        id="willie"
-        src="pictures/New Piskel (1) (1).gif"
-        alt=""
-        width="90"
-      />
-      <img
-        id="robo-sam"
-        src="pictures/New Piskel (23).gif"
-        alt=""
-        width="100"
-      />
-      <img id="zig-zane" src="pictures/New Piskel (26).gif" alt="" width="80" />
-    </div>
-    <div>
-      <img
-        id="obstacle"
-        src="pictures/New Piskel (19) (2).gif"
-        alt=""
-        width="60"
-      />
-    </div>
-    <div id="road"></div>
+      <div id="scoreBar">
+        Score:
+        <p id="score">0</p>
+      </div>
+      <div id="sprite">
+        <img
+          id="willie"
+          src="pictures/New Piskel (1) (1).gif"
+          alt=""
+          width="90"
+        />
+        <img
+          id="robo-sam"
+          src="pictures/New Piskel (23).gif"
+          alt=""
+          width="100"
+        />
+        <img
+          id="zig-zane"
+          src="pictures/New Piskel (26).gif"
+          alt=""
+          width="80"
+        />
+      </div>
+      <div id="obstacle-box">
+        <img
+          id="obstacle"
+          src="pictures/New Piskel (19) (2).gif"
+          alt=""
+          width="60"
+        />
+      </div>
+      <div id="road"></div>
 
-    <div class="playAgainMenu">
-      <div>
-        <h2>GAME OVER!</h2>
-      </div>
-      <div class="box1">
-        <p>Your Score Was:</p>
-        <p id="scoreDisplay"></p>
-      </div>
-      <div class="box2">
-        <button id="playAgainBtn">Play again</button>
-      </div>
-      <div id="dirt"></div>
-    </div>
-
-    <div id="container">
-      <div>
-        <h3>Willie the runner</h3>
-      </div>
-
-      <div>
-        <button id="play-btn" class="btn">Play</button>
-        <button id="info-btn" class="btn">Info</button>
-      </div>
-      <div>
-        <button id="characters-btn" class="btn">Characters</button>
-      </div>
-    </div>
-    <div id="character-container">
-      <div class="">
-        <p id="p">characters</p>
-      </div>
-      <div id="boxframe">
-        <div class="character-one character-box">
-          <p>Willie</p>
-          <img src="pictures/New Piskel (1) (2).png" alt="" width="125" />
+      <div class="playAgainMenu">
+        <div>
+          <h2>GAME OVER!</h2>
         </div>
-        <div class="character-two character-box">
-          <p>Robo Sam</p>
-          <img src="pictures/New Piskel (3).png" alt="" width="125" />
+        <div class="box1">
+          <p id="scoreDisplayText">Your Score Was:</p>
+          <p id="scoreDisplay"></p>
         </div>
-        <div class="character-three character-box">
-          <p>Zig Zane</p>
-          <img src="pictures/New Piskel (4).png" alt="" width="125" />
+        <div class="box2">
+          <button id="playAgainBtn">Play again</button>
+        </div>
+        <div id="dirt"></div>
+      </div>
+
+      <div id="container">
+        <div>
+          <h3>Willie the runner</h3>
+        </div>
+
+        <div>
+          <button id="play-btn" class="btn">Play</button>
+          <button id="info-btn" class="btn">Info</button>
+        </div>
+        <div>
+          <button id="characters-btn" class="btn">Characters</button>
         </div>
       </div>
-      <div>
-        <button id="back-to-start-menu-button">Back</button>
+      <div id="character-container">
+        <div class="">
+          <p id="p">characters</p>
+        </div>
+        <div id="boxframe">
+          <div id="character-menu-box">
+            <div class="character-one character-box">
+              <p>Willie</p>
+              <img
+                id="willie-img"
+                src="pictures/New Piskel (1) (2).png"
+                alt=""
+                width="125"
+              />
+            </div>
+
+            <div class="character-two character-box">
+              <p>Robo Sam</p>
+              <img
+                id="robo-sam-img"
+                src="pictures/New Piskel (3).png"
+                alt=""
+                width="125"
+              />
+            </div>
+            <div class="character-three character-box">
+              <p>Zig Zane</p>
+              <img
+                id="zig-zane-img"
+                src="pictures/New Piskel (4).png"
+                alt=""
+                width="125"
+              />
+            </div>
+          </div>
+          <div id="characters-prices">
+            <button id="price1">Unlocked</button>
+            <button id="price2">
+              350<img src="pictures/New Piskel (29).gif" alt="" width="20" />
+            </button>
+            <button id="price3">
+              800<img src="pictures/New Piskel (29).gif" alt="" width="20" />
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <button id="back-to-start-menu-button">Back</button>
+        </div>
       </div>
     </div>
-
     <div id="pause-container"></div>
+    <div id="chest-container">
+      <div id="chest-box">
+        <p id="coins">0</p>
+        <p>x</p>
+        <img src="pictures/New Piskel (29).gif" alt="" width="26" />
+      </div>
+      <img
+        id="closedChest"
+        src="pictures/New Piskel-2.png (1).png"
+        alt=""
+        width="80"
+      />
+      <img
+        id="openChest"
+        src="pictures/New Piskel-3.png.png"
+        alt=""
+        width="80"
+      />
+    </div>
 
     <script src="game.js"></script>
   </body>
