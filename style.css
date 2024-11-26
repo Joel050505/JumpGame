@@ -419,7 +419,7 @@ h3 {
 @media (max-width: 768px) {
   #sprite {
     position: absolute;
-    bottom: 195px;
+    bottom: 95px;
     left: 30px;
   }
 
@@ -430,31 +430,72 @@ h3 {
   #obstacle {
     position: absolute;
     left: 100%;
-    bottom: 190px;
+    bottom: 95px;
     width: 45px;
   }
 
   .character-box {
-    width: 150px;
+    width: 33%;
+  }
+  .character-box p {
+    font-size: 10px;
   }
   #character-menu-box {
-    width: 400px;
+    width: 300px;
   }
   #characters-prices {
-    width: 400px;
+    width: 300px;
+  }
+  #characters-prices button {
+    font-size: 10px;
+  }
+  #coin1,
+  #coin2 {
+    width: 15px;
   }
 
   #characters-prices button {
-    width: 100%;
+    width: 33%;
+    padding: 10px;
+    text-align: center;
   }
+
   #character-container {
     width: 100%;
-    top: 15%;
+    top: 10%;
   }
 
   #willie-img,
   #robo-sam-img,
   #zig-zane-img {
-    width: 100px;
+    width: 80px;
   }
+
+  .btn {
+    transform: scale(0.7);
+  }
+  h3 {
+    font-size: 25px;
+  }
+  #road {
+    height: 100px;
+  }
+  #scoreBar {
+    font-size: 18px;
+  }
+  body {
+    animation: moveBackground 30s linear infinite;
+  }
+  #back-to-start-menu-button {
+    transform: scale(0.6);
+  }
+  /* #closedChest {
+    transform: scale(0.7);
+  }
+  #openChest {
+    transform: scale(0.8);
+  }
+  #chest-box p {
+    transform: scale(0.9);
+  } */
 }
