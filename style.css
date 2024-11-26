@@ -424,14 +424,14 @@ h3 {
   }
 
   #willie {
-    width: 70px;
+    width: 50px;
   }
 
   #obstacle {
     position: absolute;
     left: 100%;
     bottom: 95px;
-    width: 45px;
+    width: 35px;
   }
 
   .character-box {
