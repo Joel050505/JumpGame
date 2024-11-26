@@ -205,12 +205,13 @@ h2 {
   font-size: 20px;
   font-family: "Press Start 2P", cursive;
   text-align: center;
-  margin: 20px;
+  margin: 10px;
   text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
   transition: all ease-in-out 0.4s;
 }
 
-#playAgainBtn:hover {
+#playAgainBtn:hover,
+.characters-btn2:hover {
   color: white;
   text-shadow: 2px 2px 0 black, 4px 4px 0 #555;
   transition: all ease-in-out 0.4s;
@@ -247,7 +248,8 @@ h3 {
   margin: 40px;
 }
 
-.btn {
+.btn,
+.characters-btn2 {
   background-color: burlywood;
   margin: 20px;
   border: 2px double burlywood;
@@ -273,10 +275,18 @@ h3 {
   width: 120px;
 }
 
-#characters-btn {
+.characters-btn,
+.characters-btn2 {
+  text-align: center;
   width: 250px;
   background-color: lightseagreen;
   border: 2px solid lightseagreen;
+}
+
+.characters-btn2 {
+  border-radius: 25px;
+  color: black;
+  text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
 }
 
 #character-container {
@@ -358,7 +368,8 @@ h3 {
   padding: 20px;
 }
 
-#back-to-start-menu-button {
+#back-to-start-menu-button,
+#back-to-play-again-menu {
   padding: 20px;
   width: 150px;
   border-radius: 20px;
@@ -370,9 +381,14 @@ h3 {
   font-size: 20px;
   text-shadow: 2px 2px 0 black, 4px 4px 0 #555;
   transition: all ease-in-out 0.4s;
+  text-align: center;
+}
+#back-to-play-again-menu {
+  width: 125px;
 }
 
-#back-to-start-menu-button:hover {
+#back-to-start-menu-button:hover,
+#back-to-play-again-menu:hover {
   transition: all ease-in-out 0.4s;
   color: black;
   text-shadow: 2px 2px 0 white, 4px 4px 0 #555;
@@ -489,6 +505,12 @@ h3 {
   #back-to-start-menu-button {
     transform: scale(0.6);
   }
+  #playAgainBtn,
+  .characters-btn2,
+  #back-to-play-again-menu {
+    transform: scale(0.7);
+  }
+
   /* #closedChest {
     transform: scale(0.7);
   }

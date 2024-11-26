@@ -10,9 +10,13 @@ const playBtn = document.querySelector("#play-btn");
 const startMenu = document.querySelector("#container");
 
 // Characters and character related stuff
-const characterButton = document.querySelector("#characters-btn");
+const characterButton = document.querySelector(".characters-btn");
+const characterButton2 = document.querySelector(".characters-btn2");
 const characterMenu = document.querySelector("#character-container");
 const characterBackBtn = document.querySelector("#back-to-start-menu-button");
+const characterAgainBackBtn = document.querySelector(
+  "#back-to-play-again-menu"
+);
 const willieMenuImg = document.querySelector(".character-one");
 const roboSamMenuImg = document.querySelector(".character-two");
 const zigZaneMenuImg = document.querySelector(".character-three");
@@ -206,11 +210,26 @@ characterButton.addEventListener("click", (e) => {
   characterMenu.classList.add("active");
 });
 
+characterButton2.addEventListener("click", (e) => {
+  e.stopPropagation();
+  characterMenu.classList.add("active");
+  characterBackBtn.style.display = "none";
+  characterAgainBackBtn.style.display = "flex";
+  hideMenu();
+});
+
+characterAgainBackBtn.style.display = "none";
 // Character back to start menu button
 characterBackBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   startMenu.classList.remove("displayNone");
   characterMenu.classList.remove("active");
+});
+
+characterAgainBackBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  characterMenu.classList.remove("active");
+  showMenu();
 });
 
 // Coin/currency for the game
@@ -400,6 +419,7 @@ function checkCollision() {
     play.style.display = "none";
     pauseButton.style.display = "none";
     triggerJump.style.animationPlayState = "paused";
+    characterButton.classList.add("active");
 
     closedChest.style.display = "flex";
 
