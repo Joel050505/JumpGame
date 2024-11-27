@@ -1,6 +1,11 @@
 // Variables for sprite,obstecle and the jump effect when hit space on the keyboard
 const sprite = document.querySelector("#sprite");
 const obstacle = document.querySelector("#obstacle");
+const boxObstacle = document.querySelector("#box-obstacle");
+const cone = document.querySelector("#cone");
+const obstacleBox = document.getElementById("obstacle-box");
+const chestObstacle = document.getElementById("chest-obstacle");
+
 const triggerJump = document.querySelector("body");
 const scoreEl = document.querySelector("#score");
 
@@ -45,7 +50,10 @@ const scoreDisplay = document.getElementById("scoreDisplay");
 // Scores variables
 let currentScore = 0;
 let scoreInterVal;
-let updateScoreTime = 2000;
+let updateScoreTime = 1800;
+
+// Default Value
+setAnimationSpeed(obstacle, 1.8);
 
 function playBackGroundMusic(music) {
   music.play();
@@ -309,27 +317,53 @@ function setAnimationSpeed(element, duration) {
   element.style.animationDuration = duration + "s";
 }
 
+function hideObstacle(show, remove1, remove2, remove3) {
+  show.style.display = "block";
+  show.classList.add("animation");
+
+  remove1.style.display = "none";
+  remove1.classList.remove("animation");
+
+  remove2.style.display = "none";
+  remove2.classList.remove("animation");
+
+  remove3.style.display = "none";
+  remove3.classList.remove("animation");
+}
+
+// Default value so that you start with Willie,
+// then in the funcction we want to add new values for each level that you are in, then the current character will change
+let currentCharacter = obstacle;
+
 function checkCurrentScore(currentScore) {
   if (currentScore >= 0 && currentScore <= 20) {
-    updateScoreTime = 2000;
-    setAnimationSpeed(obstacle, 2);
-    obstacle.src = "pictures/New Piskel (19) (2).gif";
-    coinRate = 10;
-  } else if (currentScore > 20 && currentScore <= 30) {
     updateScoreTime = 1800;
     setAnimationSpeed(obstacle, 1.8);
-    obstacle.src = "pictures/New Piskel (28).gif";
-    obstacle.style.left = 100 + "%";
-    coinRate = 9;
-  } else if (currentScore > 30 && currentScore <= 50) {
+    obstacle.style.animationPlayState = coinRate = 10;
+    hideObstacle(obstacle, boxObstacle, cone, chestObstacle);
+    currentCharacter = obstacle;
+  } else if (currentScore > 20 && currentScore <= 40) {
     updateScoreTime = 1500;
-    setAnimationSpeed(obstacle, 1.5);
-    obstacle.src = "pictures/New Piskel (27).gif";
+    setAnimationSpeed(cone, 1.5);
+    hideObstacle(cone, obstacle, boxObstacle, chestObstacle);
+    coinRate = 9;
+    currentCharacter = cone;
+  } else if (currentScore > 40 && currentScore <= 70) {
+    updateScoreTime = 1300;
+    setAnimationSpeed(boxObstacle, 1.3);
+    hideObstacle(boxObstacle, cone, obstacle, chestObstacle);
     coinRate = 8;
-  } else if (currentScore > 50 && currentScore <= 80) {
-    updateScoreTime = 1200;
-    setAnimationSpeed(obstacle, 1.2);
+    currentCharacter = boxObstacle;
+  } else if (currentScore > 70 && currentScore <= 120) {
+    updateScoreTime = 1100;
+    setAnimationSpeed(chestObstacle, 1.1);
     coinRate = 7;
+    hideObstacle(chestObstacle, cone, obstacle, boxObstacle);
+    currentCharacter = chestObstacle;
+  } else if (currentCharacter > 120 && currentScore < 120) {
+    coinRate = 5;
+    updateScoreTime = 1000;
+    setAnimationSpeed(obstacle, 0.9);
   }
 }
 
@@ -401,7 +435,7 @@ playAgainButton.addEventListener("click", (e) => {
 // Collision detection function
 function checkCollision() {
   const spriteRect = sprite.getBoundingClientRect();
-  const obstacleRect = obstacle.getBoundingClientRect();
+  const obstacleRect = currentCharacter.getBoundingClientRect();
 
   // Check if there’s an overlap
   if (
@@ -412,8 +446,8 @@ function checkCollision() {
   ) {
     // If collision is detected then the game will stop and a menu should pop up
     console.log("Collision detected!");
-    obstacle.classList.remove("animation");
-    obstacle.classList.add("resetPos");
+    currentCharacter.classList.remove("animation");
+    currentCharacter.classList.add("resetPos");
     highScoreData(currentScore);
     scoreDisplay.textContent = currentScore;
     play.style.display = "none";
@@ -422,7 +456,6 @@ function checkCollision() {
     characterButton.classList.add("active");
 
     closedChest.style.display = "flex";
-
     showMenu();
     backGroundMusic.pause();
     getCoins(currentScore);
