@@ -441,7 +441,10 @@ h3 {
     width: 50px;
   }
 
-  #obstacle {
+  #obstacle,
+  #box-obstacle,
+  #cone,
+  #chest-obstacle {
     position: absolute;
     left: 100%;
     bottom: 95px;
