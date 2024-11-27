@@ -451,6 +451,10 @@ h3 {
     width: 35px;
   }
 
+  #chest-obstacle {
+    width: 70px;
+  }
+
   .character-box {
     width: 33%;
   }
