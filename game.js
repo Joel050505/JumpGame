@@ -44,11 +44,19 @@ const closedChest = document.getElementById("closedChest");
 const chestBox = document.getElementById("chest-box");
 const chestContainer = document.getElementById("chest-container");
 const coins = document.getElementById("coins");
-
 const roboSamBuyButton = document.getElementById("price2");
 const zigZaneBuyButton = document.getElementById("price3");
 
+// Display thing, display score and display how many until your current highscore
 const scoreDisplay = document.getElementById("scoreDisplay");
+const untilHighScoreDisplay = document.getElementById(
+  "until-highScore-display"
+);
+
+function untilHighScore(score) {
+  untilHighScoreDisplay.textContent = `
+    ${Number(localStorage.getItem("highScore")) - score}`;
+}
 
 // Scores variables
 let currentScore = 0;
@@ -199,7 +207,8 @@ isUnlocked(characters.zigZaneCharacter, zigZaneBuyButton);
 localStorage.setItem("multiplyer", characters.willieCharacter.coinsMultipliyer);
 
 // Character select menu, so that you can select a character
-willieMenuImg.addEventListener("click", () => {
+willieMenuImg.addEventListener("click", (e) => {
+  e.stopPropagation();
   disableOtherCharacter(willie, roboSam, zigZane);
   localStorage.setItem(
     "multiplyer",
@@ -207,7 +216,8 @@ willieMenuImg.addEventListener("click", () => {
   );
 });
 
-roboSamMenuImg.addEventListener("click", () => {
+roboSamMenuImg.addEventListener("click", (e) => {
+  e.stopPropagation();
   if (characters.roboSamCharacter.unlocked) {
     disableOtherCharacter(roboSam, willie, zigZane);
     localStorage.setItem(
@@ -217,7 +227,8 @@ roboSamMenuImg.addEventListener("click", () => {
   }
 });
 
-zigZaneMenuImg.addEventListener("click", () => {
+zigZaneMenuImg.addEventListener("click", (e) => {
+  e.stopPropagation();
   if (characters.zigZaneCharacter.unlocked) {
     disableOtherCharacter(zigZane, willie, roboSam);
     console.log(characters.zigZaneCharacter.unlocked);
@@ -256,13 +267,15 @@ characterAgainBackBtn.addEventListener("click", () => {
 chestBox.style.display = "none";
 openChest.style.display = "none";
 
-closedChest.addEventListener("click", () => {
+closedChest.addEventListener("click", (e) => {
+  e.stopPropagation();
   openChest.style.display = "flex";
   closedChest.style.display = "none";
   chestBox.style.display = "flex";
 });
 
-openChest.addEventListener("click", () => {
+openChest.addEventListener("click", (e) => {
+  e.stopPropagation();
   chestBox.style.display = "none";
   openChest.style.display = "none";
   closedChest.style.display = "flex";
@@ -483,3 +496,7 @@ function checkCollision() {
 
 // Start the collision detection loop.
 requestAnimationFrame(checkCollision);
+
+setInterval(() => {
+  untilHighScore(currentScore);
+}, 500);

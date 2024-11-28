@@ -433,6 +433,20 @@ h3 {
 #chest-box p {
   font-size: 18px;
 }
+
+#until-highScore {
+  display: flex;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  color: yellow;
+}
+
+#until-highScore p {
+  font-size: 18px;
+  padding: 10px;
+  text-shadow: 2px 2px 0 black, 4px 4px 0 #555;
+}
 @media (max-width: 768px) {
   #sprite {
     position: absolute;
@@ -535,5 +549,9 @@ h3 {
     100% {
       transform: translateY(0);
     }
+  }
+  #until-highScore p {
+    font-size: 10px;
+    padding: 5px;
   }
 }
