@@ -22,6 +22,8 @@ const characterBackBtn = document.querySelector("#back-to-start-menu-button");
 const characterAgainBackBtn = document.querySelector(
   "#back-to-play-again-menu"
 );
+
+// Characters and their pictures
 const willieMenuImg = document.querySelector(".character-one");
 const roboSamMenuImg = document.querySelector(".character-two");
 const zigZaneMenuImg = document.querySelector(".character-three");
@@ -34,6 +36,7 @@ const jumpSound = document.getElementById("jump-sound");
 const deathsound = document.getElementById("death-sound");
 const newHighScoreSound = document.getElementById("new-high-score");
 const backGroundMusic = document.getElementById("background-music");
+const buttonSound = document.getElementById("button-click-sound");
 
 // Chest and coins
 const openChest = document.getElementById("openChest");
@@ -80,15 +83,28 @@ function highScoreData(score) {
   }
 }
 
-// Function that will store coins
-
+// Playing sounds
 function playSound(sound) {
   sound.play();
   sound.volume = 0.1;
   sound.currentTime = 0;
 }
 
-const scores = [0];
+// Make a nice sound when you press on a button
+const allButtons = document.querySelectorAll("button");
+
+allButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    buttonSound.play();
+    buttonSound.volume = 0.4;
+    e.stopPropagation();
+    setTimeout(() => {
+      buttonSound.remove();
+    }, 500);
+  });
+});
+
+// Functions for characters so i dont have to repeat the same code to much
 characterMenu.classList.add("displayNone");
 
 function showMenu() {
@@ -119,13 +135,13 @@ const characters = {
   roboSamCharacter: {
     life: 1,
     coinsMultipliyer: 1.5,
-    cost: 350,
+    cost: 450,
     unlocked: JSON.parse(localStorage.getItem("roboSamUnlocked")) || false,
   },
   zigZaneCharacter: {
     life: 2,
     coinsMultipliyer: 1.75,
-    cost: 800,
+    cost: 1000,
     unlocked: JSON.parse(localStorage.getItem("zigZaneUnlocked")) || false,
   },
 };
@@ -133,8 +149,7 @@ const characters = {
 // Buy mechanism for characters so that players can buy characters and after they buy it it will update your gold
 
 function buyMechanism(buyButton, localStorageName, _characterName) {
-  buyButton.addEventListener("click", (e) => {
-    e.stopPropagation();
+  buyButton.addEventListener("click", () => {
     let yourCoins = Number(localStorage.getItem("coins"));
     let cost = _characterName.cost;
     if (yourCoins >= cost) {
@@ -145,7 +160,11 @@ function buyMechanism(buyButton, localStorageName, _characterName) {
       localStorage.setItem(localStorageName, true);
       _characterName.unlocked = true;
     } else {
-      alert("Not enough coins");
+      alert(
+        `You need ${
+          cost - Number(localStorage.getItem("coins"))
+        } more coins to buy this character`
+      );
     }
   });
 }
@@ -180,8 +199,7 @@ isUnlocked(characters.zigZaneCharacter, zigZaneBuyButton);
 localStorage.setItem("multiplyer", characters.willieCharacter.coinsMultipliyer);
 
 // Character select menu, so that you can select a character
-willieMenuImg.addEventListener("click", (e) => {
-  e.stopPropagation();
+willieMenuImg.addEventListener("click", () => {
   disableOtherCharacter(willie, roboSam, zigZane);
   localStorage.setItem(
     "multiplyer",
@@ -189,8 +207,7 @@ willieMenuImg.addEventListener("click", (e) => {
   );
 });
 
-roboSamMenuImg.addEventListener("click", (e) => {
-  e.stopPropagation();
+roboSamMenuImg.addEventListener("click", () => {
   if (characters.roboSamCharacter.unlocked) {
     disableOtherCharacter(roboSam, willie, zigZane);
     localStorage.setItem(
@@ -200,8 +217,7 @@ roboSamMenuImg.addEventListener("click", (e) => {
   }
 });
 
-zigZaneMenuImg.addEventListener("click", (e) => {
-  e.stopPropagation();
+zigZaneMenuImg.addEventListener("click", () => {
   if (characters.zigZaneCharacter.unlocked) {
     disableOtherCharacter(zigZane, willie, roboSam);
     console.log(characters.zigZaneCharacter.unlocked);
@@ -212,14 +228,12 @@ zigZaneMenuImg.addEventListener("click", (e) => {
   }
 });
 
-characterButton.addEventListener("click", (e) => {
-  e.stopPropagation();
+characterButton.addEventListener("click", () => {
   startMenu.classList.add("displayNone");
   characterMenu.classList.add("active");
 });
 
-characterButton2.addEventListener("click", (e) => {
-  e.stopPropagation();
+characterButton2.addEventListener("click", () => {
   characterMenu.classList.add("active");
   characterBackBtn.style.display = "none";
   characterAgainBackBtn.style.display = "flex";
@@ -228,14 +242,12 @@ characterButton2.addEventListener("click", (e) => {
 
 characterAgainBackBtn.style.display = "none";
 // Character back to start menu button
-characterBackBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
+characterBackBtn.addEventListener("click", () => {
   startMenu.classList.remove("displayNone");
   characterMenu.classList.remove("active");
 });
 
-characterAgainBackBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
+characterAgainBackBtn.addEventListener("click", () => {
   characterMenu.classList.remove("active");
   showMenu();
 });
@@ -244,15 +256,13 @@ characterAgainBackBtn.addEventListener("click", (e) => {
 chestBox.style.display = "none";
 openChest.style.display = "none";
 
-closedChest.addEventListener("click", (e) => {
-  e.stopPropagation();
+closedChest.addEventListener("click", () => {
   openChest.style.display = "flex";
   closedChest.style.display = "none";
   chestBox.style.display = "flex";
 });
 
-openChest.addEventListener("click", (e) => {
-  e.stopPropagation();
+openChest.addEventListener("click", () => {
   chestBox.style.display = "none";
   openChest.style.display = "none";
   closedChest.style.display = "flex";
@@ -276,9 +286,10 @@ function getCoins(score) {
 function removeChestsFromScreen() {
   closedChest.style.display = "none";
   openChest.style.display = "none";
+  chestBox.style.display = "none";
 }
 
-// Pause and start function to the game
+// Pause and start function to the game so players can pause the game if they want to, but if the side is reloaded the game will reset to the start menu
 const play = document.createElement("i");
 const pauseButton = document.createElement("i");
 const pausBox = document.querySelector("#paus-box");
@@ -339,7 +350,7 @@ function checkCurrentScore(currentScore) {
   if (currentScore >= 0 && currentScore <= 20) {
     updateScoreTime = 1800;
     setAnimationSpeed(obstacle, 1.8);
-    obstacle.style.animationPlayState = coinRate = 10;
+    coinRate = 10;
     hideObstacle(obstacle, boxObstacle, cone, chestObstacle);
     currentCharacter = obstacle;
   } else if (currentScore > 20 && currentScore <= 40) {
@@ -354,13 +365,16 @@ function checkCurrentScore(currentScore) {
     hideObstacle(boxObstacle, cone, obstacle, chestObstacle);
     coinRate = 8;
     currentCharacter = boxObstacle;
-  } else if (currentScore > 70 && currentScore <= 120) {
-    updateScoreTime = 1100;
-    setAnimationSpeed(chestObstacle, 1.1);
-    coinRate = 7;
-    hideObstacle(chestObstacle, cone, obstacle, boxObstacle);
-    currentCharacter = chestObstacle;
-  } else if (currentCharacter > 120 && currentScore < 120) {
+  } else if (currentScore > 70 && currentScore <= 110) {
+    boxObstacle.classList.remove("animation");
+    setTimeout(() => {
+      updateScoreTime = 1100;
+      setAnimationSpeed(chestObstacle, 1.1);
+      hideObstacle(chestObstacle, cone, obstacle, boxObstacle);
+      coinRate = 7;
+      currentCharacter = chestObstacle;
+    }, 1000);
+  } else if (currentScore > 110 && currentScore <= 150) {
     coinRate = 5;
     updateScoreTime = 1000;
     setAnimationSpeed(obstacle, 0.9);
@@ -375,10 +389,10 @@ function stopScoreInterVal() {
   clearInterval(scoreInterVal);
 }
 
-// Adds the default animation for the jump effect on the sprite
+// Adds the default animation for the jump effect on the sprite.
 obstacle.classList.remove("animation");
 
-// The first screen u get to when page is loaded
+// The first screen you get to when page is loaded for the first time.
 playBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   obstacle.classList.add("animation");
@@ -389,7 +403,8 @@ playBtn.addEventListener("click", (e) => {
   removeChestsFromScreen();
 });
 
-// event listener for space button down, if space is keydown it will jump and trigger an animation
+// Event listener for space button down, if space is keydown it will jump and trigger an animation.
+// Event listener for mobile will be a click on the screen.
 
 triggerJump.addEventListener("click", () => {
   if (!sprite.classList.contains("jump")) {
@@ -415,7 +430,7 @@ triggerJump.addEventListener("keydown", (e) => {
   }
 });
 
-// Play again button in the play again menu
+// Play again button in the play again menu so people can restart the game.
 playAgainButton.addEventListener("click", (e) => {
   e.stopPropagation();
   currentScore = 0;
@@ -432,19 +447,19 @@ playAgainButton.addEventListener("click", (e) => {
   removeChestsFromScreen();
 });
 
-// Collision detection function
+// Collision detection function.
 function checkCollision() {
   const spriteRect = sprite.getBoundingClientRect();
   const obstacleRect = currentCharacter.getBoundingClientRect();
 
-  // Check if there’s an overlap
+  // Check if there’s an overlap.
   if (
     spriteRect.left < obstacleRect.right &&
     spriteRect.right > obstacleRect.left &&
     spriteRect.top < obstacleRect.bottom &&
     spriteRect.bottom > obstacleRect.top
   ) {
-    // If collision is detected then the game will stop and a menu should pop up
+    // If collision is detected then the game will stop and a menu should pop up.
     console.log("Collision detected!");
     currentCharacter.classList.remove("animation");
     currentCharacter.classList.add("resetPos");
@@ -454,6 +469,7 @@ function checkCollision() {
     pauseButton.style.display = "none";
     triggerJump.style.animationPlayState = "paused";
     characterButton.classList.add("active");
+    chestObstacle.classList.remove("animation");
 
     closedChest.style.display = "flex";
     showMenu();
@@ -461,9 +477,9 @@ function checkCollision() {
     getCoins(currentScore);
     stopScoreInterVal();
   }
-  // Repeat on the next animation frame
+  // Repeat on the next animation frame.
   requestAnimationFrame(checkCollision);
 }
 
-// Start the collision detection loop
+// Start the collision detection loop.
 requestAnimationFrame(checkCollision);

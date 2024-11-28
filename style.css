@@ -426,6 +426,9 @@ h3 {
   top: 25px;
   right: 20px;
 }
+#chest-obstacle {
+  left: 120%;
+}
 
 #chest-box p {
   font-size: 18px;
@@ -518,5 +521,19 @@ h3 {
   .box1 p {
     font-size: 14px;
     text-shadow: 1px 1px 0 black, 2px 2px 0 #555;
+  }
+  @keyframes jump {
+    0% {
+      transform: translateY(-50px);
+    }
+    30% {
+      transform: translateY(-110px);
+    }
+    70% {
+      transform: translateY(-40px);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
 }
