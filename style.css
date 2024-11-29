@@ -417,6 +417,7 @@ h3 {
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  z-index: 10;
 }
 
 #chest-box {
@@ -437,16 +438,39 @@ h3 {
 #until-highScore {
   display: flex;
   position: absolute;
-  top: 50px;
+  top: 100px;
   left: 10px;
   color: yellow;
 }
 
 #until-highScore p {
   font-size: 18px;
-  padding: 10px;
+  padding: 5px;
   text-shadow: 2px 2px 0 black, 4px 4px 0 #555;
 }
+
+#level-container {
+  position: absolute;
+  display: flex;
+  top: 0;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-shadow: 1px 1px 0 black, 2px 2px 0 #555;
+}
+
+#level-box {
+  display: flex;
+  margin: 10px;
+}
+
+#level-box p {
+  padding: 5px;
+  font-size: 18px;
+}
+
 @media (max-width: 768px) {
   #sprite {
     position: absolute;
@@ -520,6 +544,8 @@ h3 {
   }
   #scoreBar {
     font-size: 18px;
+    left: -10px;
+    top: -5px;
   }
   body {
     animation: moveBackground 30s linear infinite;
@@ -551,7 +577,14 @@ h3 {
     }
   }
   #until-highScore p {
-    font-size: 10px;
-    padding: 5px;
+    font-size: 14px;
+    padding: 2px;
+  }
+  #level-img {
+    width: 120px;
+  }
+  #level-box p {
+    padding: 2px;
+    font-size: 14px;
   }
 }

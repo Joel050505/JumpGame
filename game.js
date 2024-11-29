@@ -52,11 +52,23 @@ const scoreDisplay = document.getElementById("scoreDisplay");
 const untilHighScoreDisplay = document.getElementById(
   "until-highScore-display"
 );
+const levelBox = document.getElementById("until-highScore");
 
-function untilHighScore(score) {
-  untilHighScoreDisplay.textContent = `
-    ${Number(localStorage.getItem("highScore")) - score}`;
-}
+untilHighScoreDisplay.textContent = localStorage.getItem("highScore");
+
+levelBox.style.display = "flex";
+
+// function untilHighScore(score) {
+//   let untilScore = Number(localStorage.getItem("highScore")) - score;
+
+//   if (untilScore >= 0) {
+//     untilHighScoreDisplay.textContent = `${untilScore}`;
+//   }
+// }
+
+// untilHighScoreDisplay.textContent = `${Number(
+//   localStorage.getItem("highScore")
+// )}`;
 
 // Scores variables
 let currentScore = 0;
@@ -286,10 +298,10 @@ openChest.addEventListener("click", (e) => {
 coins.textContent = localStorage.getItem("coins");
 let coinRate = 10;
 let Multipliyer = Number(localStorage.getItem("multiplyer"));
+let coinsFromCurrentGame = 0;
 
 function getCoins(score) {
-  let coinsFromCurrentGame = Math.round(score / coinRate) * Multipliyer;
-
+  coinsFromCurrentGame = Math.round(score / coinRate) * Multipliyer;
   let currentCoins = Number(localStorage.getItem("coins"));
 
   localStorage.setItem("coins", currentCoins + coinsFromCurrentGame);
@@ -301,6 +313,86 @@ function removeChestsFromScreen() {
   openChest.style.display = "none";
   chestBox.style.display = "none";
 }
+
+// Level system for players so they have another reason of playing this boring game
+
+const levelImg = document.getElementById("level-img");
+
+function updateLevel(coins) {
+  let xp = coins * 5;
+
+  let experienceToLevelUp = Number(localStorage.getItem("xpToLevelUp"));
+
+  let rate = Math.round(experienceToLevelUp / 12);
+
+  console.log("rate: ", rate, "amoun to level up: ", experienceToLevelUp, " ");
+  let currentExperience = Number(localStorage.getItem("experience")) + xp;
+
+  Number(localStorage.setItem("experience", currentExperience));
+
+  console.log(
+    "rate: ",
+    rate,
+    "amoun to level up: ",
+    experienceToLevelUp,
+    "current experience: ",
+    currentExperience
+  );
+
+  displayLevel(currentExperience);
+}
+
+function displayLevel(currentExperience, rate) {
+  rate = Math.round(Number(localStorage.getItem("xpToLevelUp")) / 12);
+  let experienceToLevelUp = Number(localStorage.getItem("xpToLevelUp"));
+
+  if (currentExperience == 0) {
+    levelImg.src = "level images/New Piskel-1.png (3).png";
+  } else if (currentExperience > 0 && currentExperience <= rate * 1) {
+    levelImg.src = "level images/New Piskel-2.png (4).png";
+  } else if (currentExperience > rate && currentExperience <= rate * 2) {
+    levelImg.src = "level images/New Piskel-3.png (1).png";
+  } else if (currentExperience > rate * 2 && currentExperience <= rate * 3) {
+    levelImg.src = "level images/New Piskel-4.png (1).png";
+  } else if (currentExperience > rate * 3 && currentExperience <= rate * 4) {
+    levelImg.src = "level images/New Piskel-5.png (1).png";
+  } else if (currentExperience > rate * 4 && currentExperience <= rate * 5) {
+    levelImg.src = "level images/New Piskel-6.png (1).png";
+  } else if (currentExperience > rate * 5 && currentExperience <= rate * 6) {
+    levelImg.src = "level images/New Piskel-7.png (1).png";
+  } else if (currentExperience > rate * 6 && currentExperience <= rate * 7) {
+    levelImg.src = "level images/New Piskel-8.png (1).png";
+  } else if (currentExperience > rate * 7 && currentExperience <= rate * 8) {
+    levelImg.src = "level images/New Piskel-9.png (1).png";
+  } else if (currentExperience > rate * 8 && currentExperience <= rate * 9) {
+    levelImg.src = "level images/New Piskel-10.png (1).png";
+  } else if (currentExperience > rate * 9 && currentExperience <= rate * 10) {
+    levelImg.src = "level images/New Piskel-11.png (2).png";
+  } else if (currentExperience > rate * 10 && currentExperience <= rate * 11) {
+    levelImg.src = "level images/New Piskel-12.png (2).png";
+  } else if (currentExperience >= experienceToLevelUp) {
+    levelImg.src = "level images/New Piskel-13.png (3).png";
+    document.querySelector("#level").textContent =
+      Number(localStorage.getItem("level")) + 1;
+
+    localStorage.setItem("experience", 0);
+    localStorage.setItem(
+      "xpToLevelUp",
+      Number(localStorage.getItem("xpToLevelUp")) + 50
+    );
+
+    document.querySelector("#level").textContent =
+      Number(localStorage.getItem("level")) + 1;
+
+    localStorage.setItem("level", Number(localStorage.getItem("level")) + 1);
+  }
+}
+
+let number = Number(localStorage.getItem("experience"));
+
+displayLevel(number);
+
+document.getElementById("level").textContent = localStorage.getItem("level");
 
 // Pause and start function to the game so players can pause the game if they want to, but if the side is reloaded the game will reset to the start menu
 const play = document.createElement("i");
@@ -414,6 +506,8 @@ playBtn.addEventListener("click", (e) => {
   addPauseAndStartButton();
   playBackGroundMusic(backGroundMusic);
   removeChestsFromScreen();
+  displayLevel(number);
+  levelBox.style.display = "none";
 });
 
 // Event listener for space button down, if space is keydown it will jump and trigger an animation.
@@ -458,6 +552,7 @@ playAgainButton.addEventListener("click", (e) => {
   triggerJump.style.animationPlayState = "running";
   playBackGroundMusic(backGroundMusic);
   removeChestsFromScreen();
+  levelBox.style.display = "none";
 });
 
 // Collision detection function.
@@ -483,12 +578,15 @@ function checkCollision() {
     triggerJump.style.animationPlayState = "paused";
     characterButton.classList.add("active");
     chestObstacle.classList.remove("animation");
+    levelBox.style.display = "flex";
 
     closedChest.style.display = "flex";
     showMenu();
     backGroundMusic.pause();
     getCoins(currentScore);
     stopScoreInterVal();
+
+    updateLevel(coinsFromCurrentGame);
   }
   // Repeat on the next animation frame.
   requestAnimationFrame(checkCollision);
@@ -497,6 +595,6 @@ function checkCollision() {
 // Start the collision detection loop.
 requestAnimationFrame(checkCollision);
 
-setInterval(() => {
-  untilHighScore(currentScore);
-}, 500);
+// setInterval(() => {
+//   untilHighScore(currentScore);
+// }, 500);
