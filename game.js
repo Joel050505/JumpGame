@@ -384,7 +384,7 @@ function displayLevel(currentExperience, rate) {
     localStorage.setItem("experience", 0);
     localStorage.setItem(
       "xpToLevelUp",
-      Number(localStorage.getItem("xpToLevelUp")) + 50
+      Number(localStorage.getItem("xpToLevelUp")) + 20
     );
 
     document.querySelector("#level").textContent =
