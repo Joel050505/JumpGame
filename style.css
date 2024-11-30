@@ -471,6 +471,13 @@ h3 {
   font-size: 18px;
 }
 
+#level-inner-box {
+  display: flex;
+}
+#level-inner-box p {
+  padding: 4px;
+  font-size: 10px;
+}
 @media (max-width: 768px) {
   #sprite {
     position: absolute;
@@ -605,5 +612,9 @@ h3 {
   }
   #coins-img {
     width: 18px;
+  }
+  #level-inner-box p {
+    padding: 4px;
+    font-size: 6px;
   }
 }
