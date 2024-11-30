@@ -401,12 +401,19 @@ displayLevel(number);
 document.getElementById("level").textContent = localStorage.getItem("level");
 
 // Make a text under the level display that displays how much xp there is until level up
+const xpUntilLevel = document.getElementById("xpUntilLevelUp");
+
 function xpUntilNextLevel() {
-  document.getElementById("xpUntilLevelUp").textContent =
-    Number(localStorage.getItem("xpToLevelUp")) -
-    Number(localStorage.getItem("experience"));
+  let xpToLevelUp = Number(localStorage.getItem("xpToLevelUp"));
+  let experience = Number(localStorage.getItem("experience"));
+
+  let remainingXp = xpToLevelUp - experience;
+
+  xpUntilLevel.textContent = remainingXp;
 }
+
 xpUntilNextLevel();
+
 // Pause and start function to the game so players can pause the game if they want to, but if the side is reloaded the game will reset to the start menu
 const play = document.createElement("i");
 const pauseButton = document.createElement("i");
@@ -593,8 +600,6 @@ function checkCollision() {
     chestObstacle.classList.remove("animation");
     levelBox.style.display = "flex";
 
-    xpUntilNextLevel();
-
     closedChest.style.display = "flex";
     showMenu();
     backGroundMusic.pause();
@@ -602,6 +607,7 @@ function checkCollision() {
     stopScoreInterVal();
 
     updateLevel(coinsFromCurrentGame);
+    xpUntilNextLevel();
   }
   // Repeat on the next animation frame.
   requestAnimationFrame(checkCollision);
