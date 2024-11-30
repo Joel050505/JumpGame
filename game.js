@@ -377,7 +377,7 @@ function displayLevel(currentExperience, rate) {
   } else if (currentExperience > rate * 10 && currentExperience <= rate * 11) {
     levelImg.src = "level images/New Piskel-12.png (2).png";
   } else if (currentExperience >= experienceToLevelUp) {
-    levelImg.src = "level images/New Piskel-13.png (3).png";
+    levelImg.src = "level images/New Piskel-1.png (3).png";
     document.querySelector("#level").textContent =
       Number(localStorage.getItem("level")) + 1;
 
@@ -528,6 +528,7 @@ playBtn.addEventListener("click", (e) => {
   removeChestsFromScreen();
   displayLevel(number);
   levelBox.style.display = "none";
+  xpUntilNextLevel();
 });
 
 // Event listener for space button down, if space is keydown it will jump and trigger an animation.
@@ -573,6 +574,7 @@ playAgainButton.addEventListener("click", (e) => {
   playBackGroundMusic(backGroundMusic);
   removeChestsFromScreen();
   levelBox.style.display = "none";
+  xpUntilNextLevel();
 });
 
 // Collision detection function.
