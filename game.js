@@ -313,6 +313,12 @@ if (localStorage.getItem("experience") === null) {
 if (localStorage.getItem("xpToLevelUp") === null) {
   localStorage.setItem("xpToLevelUp", 130);
 }
+if (localStorage.getItem("roboSamUnlocked") === null) {
+  localStorage.setItem("roboSamUnlocked", false);
+}
+if (localStorage.getItem("zigZaneUnlocked") === null) {
+  localStorage.setItem("zigZaneUnlocked", false);
+}
 
 const levelImg = document.getElementById("level-img");
 
