@@ -304,6 +304,16 @@ function removeChestsFromScreen() {
 
 // Level system for players so they have another reason of playing this boring game
 
+if (localStorage.getItem("level") === null) {
+  localStorage.setItem("level", 1);
+}
+if (localStorage.getItem("experience") === null) {
+  localStorage.setItem("experience", 0);
+}
+if (localStorage.getItem("xpToLevelUp") === null) {
+  localStorage.setItem("xpToLevelUp", 130);
+}
+
 const levelImg = document.getElementById("level-img");
 
 function updateLevel(coins) {
