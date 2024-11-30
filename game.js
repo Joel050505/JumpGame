@@ -320,6 +320,8 @@ if (localStorage.getItem("zigZaneUnlocked") === null) {
   localStorage.setItem("zigZaneUnlocked", false);
 }
 
+localStorage.removeItem("xpToLevelUp");
+
 const levelImg = document.getElementById("level-img");
 
 function updateLevel(coins) {
