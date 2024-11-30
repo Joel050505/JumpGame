@@ -437,16 +437,16 @@ h3 {
 
 #until-highScore {
   display: flex;
-  position: absolute;
   top: 100px;
-  left: 10px;
-  color: yellow;
+  color: #ffd943;
+  text-align: center;
+  justify-content: center;
 }
 
 #until-highScore p {
   font-size: 18px;
   padding: 5px;
-  text-shadow: 2px 2px 0 black, 4px 4px 0 #555;
+  text-shadow: 1px 1px 0 black, 2px 2px 0 #555;
 }
 
 #level-container {
@@ -536,17 +536,21 @@ h3 {
   .btn {
     transform: scale(0.7);
   }
+
   h3 {
     font-size: 25px;
   }
+
   #road {
     height: 100px;
   }
+
   #scoreBar {
-    font-size: 18px;
+    font-size: 10px;
     left: -10px;
-    top: -5px;
+    top: 5px;
   }
+
   body {
     animation: moveBackground 30s linear infinite;
   }
@@ -586,5 +590,20 @@ h3 {
   #level-box p {
     padding: 2px;
     font-size: 14px;
+  }
+
+  #closedChest {
+    width: 60px;
+  }
+  #openChest {
+    width: 60px;
+  }
+
+  #chest-box p {
+    top: -5px;
+    font-size: 12px;
+  }
+  #coins-img {
+    width: 18px;
   }
 }
