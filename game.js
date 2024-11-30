@@ -58,18 +58,6 @@ untilHighScoreDisplay.textContent = localStorage.getItem("highScore");
 
 levelBox.style.display = "flex";
 
-// function untilHighScore(score) {
-//   let untilScore = Number(localStorage.getItem("highScore")) - score;
-
-//   if (untilScore >= 0) {
-//     untilHighScoreDisplay.textContent = `${untilScore}`;
-//   }
-// }
-
-// untilHighScoreDisplay.textContent = `${Number(
-//   localStorage.getItem("highScore")
-// )}`;
-
 // Scores variables
 let currentScore = 0;
 let scoreInterVal;
@@ -341,6 +329,8 @@ function updateLevel(coins) {
 
   displayLevel(currentExperience);
 }
+
+// localStorage.setItem("xpToLevelUp", 130);
 
 function displayLevel(currentExperience, rate) {
   rate = Math.round(Number(localStorage.getItem("xpToLevelUp")) / 12);
