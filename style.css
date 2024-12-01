@@ -114,7 +114,8 @@ body {
 #obstacle,
 #box-obstacle,
 #cone,
-#chest-obstacle {
+#chest-obstacle,
+#car-obstacle {
   position: absolute;
   left: 100%;
   bottom: 190px;
@@ -474,6 +475,7 @@ h3 {
 #level-inner-box {
   display: flex;
 }
+
 #level-inner-box p {
   padding: 4px;
   font-size: 10px;
@@ -499,7 +501,8 @@ h3 {
     width: 35px;
   }
 
-  #chest-obstacle {
+  #chest-obstacle,
+  #car-obstacle {
     width: 70px;
   }
 
@@ -616,5 +619,9 @@ h3 {
   #level-inner-box p {
     padding: 4px;
     font-size: 6px;
+  }
+
+  #level-container {
+    right: -10px;
   }
 }

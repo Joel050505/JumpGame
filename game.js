@@ -5,6 +5,7 @@ const boxObstacle = document.querySelector("#box-obstacle");
 const cone = document.querySelector("#cone");
 const obstacleBox = document.getElementById("obstacle-box");
 const chestObstacle = document.getElementById("chest-obstacle");
+const carObstacle = document.getElementById("car-obstacle");
 
 const triggerJump = document.querySelector("body");
 const scoreEl = document.querySelector("#score");
@@ -61,10 +62,6 @@ levelBox.style.display = "flex";
 // Scores variables
 let currentScore = 0;
 let scoreInterVal;
-let updateScoreTime = 1800;
-
-// Default Value
-setAnimationSpeed(obstacle, 1.8);
 
 function playBackGroundMusic(music) {
   music.play();
@@ -453,7 +450,7 @@ function setAnimationSpeed(element, duration) {
   element.style.animationDuration = duration + "s";
 }
 
-function hideObstacle(show, remove1, remove2, remove3) {
+function hideObstacle(show, remove1, remove2, remove3, remove4) {
   show.style.display = "block";
   show.classList.add("animation");
 
@@ -465,53 +462,81 @@ function hideObstacle(show, remove1, remove2, remove3) {
 
   remove3.style.display = "none";
   remove3.classList.remove("animation");
+
+  remove4.style.display = "none";
+  remove4.classList.remove("animation");
 }
 
 // Default value so that you start with Willie,
 // then in the funcction we want to add new values for each level that you are in, then the current character will change
 let currentCharacter = obstacle;
+let updateScoreTime = 1800;
+// Default Value
+setAnimationSpeed(obstacle, 1.8);
 
 function checkCurrentScore(currentScore) {
   if (currentScore >= 0 && currentScore <= 20) {
     updateScoreTime = 1800;
+    updateScoreTimeFunction(updateScoreTime);
     setAnimationSpeed(obstacle, 1.8);
     coinRate = 10;
-    hideObstacle(obstacle, boxObstacle, cone, chestObstacle);
+    hideObstacle(obstacle, boxObstacle, cone, chestObstacle, carObstacle);
     currentCharacter = obstacle;
   } else if (currentScore > 20 && currentScore <= 40) {
-    updateScoreTime = 1500;
-    setAnimationSpeed(cone, 1.5);
-    hideObstacle(cone, obstacle, boxObstacle, chestObstacle);
-    coinRate = 9;
-    currentCharacter = cone;
+    obstacle.classList.remove("animation");
+    setTimeout(() => {
+      updateScoreTime = 1500;
+      updateScoreTimeFunction(updateScoreTime);
+      setAnimationSpeed(cone, 1.5);
+      hideObstacle(cone, obstacle, boxObstacle, chestObstacle, carObstacle);
+      coinRate = 9;
+      currentCharacter = cone;
+    }, 1000);
   } else if (currentScore > 40 && currentScore <= 70) {
-    updateScoreTime = 1300;
-    setAnimationSpeed(boxObstacle, 1.3);
-    hideObstacle(boxObstacle, cone, obstacle, chestObstacle);
-    coinRate = 8;
-    currentCharacter = boxObstacle;
+    cone.classList.remove("animation");
+    setTimeout(() => {
+      updateScoreTime = 1300;
+      updateScoreTimeFunction(updateScoreTime);
+      setAnimationSpeed(boxObstacle, 1.3);
+      hideObstacle(boxObstacle, cone, obstacle, chestObstacle, carObstacle);
+      coinRate = 8;
+      currentCharacter = boxObstacle;
+    }, 1000);
   } else if (currentScore > 70 && currentScore <= 110) {
     boxObstacle.classList.remove("animation");
     setTimeout(() => {
+      updateScoreTimeFunction(updateScoreTime);
       updateScoreTime = 1100;
       setAnimationSpeed(chestObstacle, 1.1);
-      hideObstacle(chestObstacle, cone, obstacle, boxObstacle);
+      hideObstacle(chestObstacle, cone, obstacle, boxObstacle, carObstacle);
       coinRate = 7;
       currentCharacter = chestObstacle;
     }, 1000);
-  } else if (currentScore > 110 && currentScore <= 150) {
-    coinRate = 5;
-    updateScoreTime = 1000;
-    setAnimationSpeed(obstacle, 0.9);
+  } else if (currentScore > 110 && currentScore <= 400) {
+    chestObstacle.classList.remove("animation");
+    setTimeout(() => {
+      updateScoreTimeFunction(updateScoreTime);
+      stopScoreInterVal();
+      coinRate = 5;
+      updateScoreTime = 1000;
+      setAnimationSpeed(carObstacle, 1);
+      hideObstacle(carObstacle, cone, obstacle, boxObstacle);
+      currentCharacter = carObstacle;
+    }, 1000);
   }
 }
 
-function startScoreInterval() {
+function startScoreInterval(updateScoreTime) {
   scoreInterVal = setInterval(upDateScore, updateScoreTime);
 }
 
 function stopScoreInterVal() {
   clearInterval(scoreInterVal);
+}
+
+function updateScoreTimeFunction(time) {
+  stopScoreInterVal();
+  startScoreInterval(time);
 }
 
 // Adds the default animation for the jump effect on the sprite.
@@ -617,7 +642,3 @@ function checkCollision() {
 
 // Start the collision detection loop.
 requestAnimationFrame(checkCollision);
-
-// setInterval(() => {
-//   untilHighScore(currentScore);
-// }, 500);
