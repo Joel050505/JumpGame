@@ -475,7 +475,7 @@ let updateScoreTime;
 setAnimationSpeed(obstacle, 1.8);
 
 function checkCurrentScore(currentScore) {
-  if (currentScore >= 0 && currentScore <= 10) {
+  if (currentScore >= 0 && currentScore <= 20) {
     updateScoreTime = 1800;
     updateScoreTimeFunction(updateScoreTime);
     setAnimationSpeed(obstacle, 1.8);
