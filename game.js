@@ -470,23 +470,24 @@ function hideObstacle(show, remove1, remove2, remove3, remove4) {
 // Default value so that you start with Willie,
 // then in the funcction we want to add new values for each level that you are in, then the current character will change
 let currentCharacter = obstacle;
-let updateScoreTime = 1800;
+let updateScoreTime;
 // Default Value
 setAnimationSpeed(obstacle, 1.8);
 
 function checkCurrentScore(currentScore) {
-  if (currentScore >= 0 && currentScore <= 20) {
+  if (currentScore >= 0 && currentScore <= 10) {
     updateScoreTime = 1800;
     updateScoreTimeFunction(updateScoreTime);
     setAnimationSpeed(obstacle, 1.8);
     coinRate = 10;
     hideObstacle(obstacle, boxObstacle, cone, chestObstacle, carObstacle);
     currentCharacter = obstacle;
-  } else if (currentScore > 20 && currentScore <= 40) {
+  } else if (currentScore > 10 && currentScore <= 40) {
     obstacle.classList.remove("animation");
+    updateScoreTime = 1500;
+    updateScoreTimeFunction(updateScoreTime);
+
     setTimeout(() => {
-      updateScoreTime = 1500;
-      updateScoreTimeFunction(updateScoreTime);
       setAnimationSpeed(cone, 1.5);
       hideObstacle(cone, obstacle, boxObstacle, chestObstacle, carObstacle);
       coinRate = 9;
@@ -494,9 +495,10 @@ function checkCurrentScore(currentScore) {
     }, 1000);
   } else if (currentScore > 40 && currentScore <= 70) {
     cone.classList.remove("animation");
+    updateScoreTime = 1300;
+    updateScoreTimeFunction(updateScoreTime);
+
     setTimeout(() => {
-      updateScoreTime = 1300;
-      updateScoreTimeFunction(updateScoreTime);
       setAnimationSpeed(boxObstacle, 1.3);
       hideObstacle(boxObstacle, cone, obstacle, chestObstacle, carObstacle);
       coinRate = 8;
@@ -504,9 +506,10 @@ function checkCurrentScore(currentScore) {
     }, 1000);
   } else if (currentScore > 70 && currentScore <= 110) {
     boxObstacle.classList.remove("animation");
+    updateScoreTimeFunction(updateScoreTime);
+    updateScoreTime = 1100;
+
     setTimeout(() => {
-      updateScoreTimeFunction(updateScoreTime);
-      updateScoreTime = 1100;
       setAnimationSpeed(chestObstacle, 1.1);
       hideObstacle(chestObstacle, cone, obstacle, boxObstacle, carObstacle);
       coinRate = 7;
@@ -514,11 +517,11 @@ function checkCurrentScore(currentScore) {
     }, 1000);
   } else if (currentScore > 110 && currentScore <= 400) {
     chestObstacle.classList.remove("animation");
+    updateScoreTimeFunction(updateScoreTime);
+    updateScoreTime = 1000;
+
     setTimeout(() => {
-      updateScoreTimeFunction(updateScoreTime);
-      stopScoreInterVal();
       coinRate = 5;
-      updateScoreTime = 1000;
       setAnimationSpeed(carObstacle, 1);
       hideObstacle(carObstacle, cone, obstacle, boxObstacle);
       currentCharacter = carObstacle;
@@ -535,8 +538,8 @@ function stopScoreInterVal() {
 }
 
 function updateScoreTimeFunction(time) {
-  stopScoreInterVal();
-  startScoreInterval(time);
+  stopScoreInterVal(); // Stops the current one and beggins a new one with the time varible
+  startScoreInterval(time); // Starts a new one
 }
 
 // Adds the default animation for the jump effect on the sprite.
@@ -624,7 +627,13 @@ function checkCollision() {
     pauseButton.style.display = "none";
     triggerJump.style.animationPlayState = "paused";
     characterButton.classList.add("active");
+
     chestObstacle.classList.remove("animation");
+    cone.classList.remove("animation");
+    obstacle.classList.remove("animation");
+    carObstacle.classList.remove("animation");
+    boxObstacle.classList.remove("animation");
+
     levelBox.style.display = "flex";
 
     closedChest.style.display = "flex";
