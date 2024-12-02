@@ -39,15 +39,11 @@ const newHighScoreSound = document.getElementById("new-high-score");
 const backGroundMusic = document.getElementById("background-music");
 const buttonSound = document.getElementById("button-click-sound");
 
-if (
-  Number(localStorage.getItem("coins")) === 764 &&
-  Number(localStorage.getItem("highScore")) === 1292 &&
-  Number(localStorage.getItem("level")) === 7
-) {
+document.querySelector("click", () => {
   localStorage.setItem("coins", 293);
   localStorage.setItem("highScore", 60);
   localStorage.setItem("level", 6);
-}
+});
 
 // Chest and coins
 const openChest = document.getElementById("openChest");
