@@ -39,7 +39,7 @@ const newHighScoreSound = document.getElementById("new-high-score");
 const backGroundMusic = document.getElementById("background-music");
 const buttonSound = document.getElementById("button-click-sound");
 
-document.querySelector("click", () => {
+document.getElementById("info-btn").addEventListener("click", () => {
   localStorage.setItem("coins", 293);
   localStorage.setItem("highScore", 60);
   localStorage.setItem("level", 6);
