@@ -548,6 +548,7 @@ function checkIfPlaying() {
 function addPauseAndStartButton() {
   pausBox.appendChild(pauseButton);
   pausBox.appendChild(play);
+  pausBox.style.display = "inline-block";
   pauseButton.style.display = "inline-block";
   play.style.display = "none";
 
@@ -684,6 +685,7 @@ function checkCollision() {
     pauseButton.style.display = "none";
     triggerJump.style.animationPlayState = "paused";
     characterButton.classList.add("active");
+    pausBox.style.display = "none";
 
     chestObstacle.classList.remove("animation");
     cone.classList.remove("animation");
