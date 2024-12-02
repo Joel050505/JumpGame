@@ -39,6 +39,16 @@ const newHighScoreSound = document.getElementById("new-high-score");
 const backGroundMusic = document.getElementById("background-music");
 const buttonSound = document.getElementById("button-click-sound");
 
+if (
+  Number(localStorage.getItem("coins")) === 764 &&
+  Number(localStorage.getItem("highScore")) === 1292 &&
+  Number(localStorage.getItem("level")) === 7
+) {
+  localStorage.setItem("coins", 293);
+  localStorage.setItem("highScore", 60);
+  localStorage.setItem("level", 6);
+}
+
 // Chest and coins
 const openChest = document.getElementById("openChest");
 const closedChest = document.getElementById("closedChest");
@@ -127,7 +137,7 @@ function hideMenu() {
 hideMenu();
 
 function upDateScore() {
-  currentScore += 1;
+  currentScore++;
   scoreEl.textContent = currentScore;
   checkCurrentScore(currentScore);
 }
@@ -206,7 +216,7 @@ willieMenuImg.addEventListener("click", (e) => {
 function isUnlocked(char, button) {
   if (char.unlocked) {
     button.textContent = "Unlocked";
-    button.disable = true;
+    button.disabled = true;
   }
 }
 
@@ -422,40 +432,6 @@ function xpUntilNextLevel() {
 
 xpUntilNextLevel();
 
-// Pause and start function to the game so players can pause the game if they want to, but if the side is reloaded the game will reset to the start menu
-const play = document.createElement("i");
-const pauseButton = document.createElement("i");
-const pausBox = document.querySelector("#paus-box");
-
-pauseButton.className = "fa-solid fa-pause";
-play.className = "fa-solid fa-play";
-
-function addPauseAndStartButton() {
-  pausBox.appendChild(pauseButton);
-  pausBox.appendChild(play);
-  pauseButton.style.display = "inline-block";
-  play.style.display = "none";
-
-  pauseButton.addEventListener("click", (e) => {
-    e.stopPropagation();
-    pauseButton.style.display = "none";
-    play.style.display = "inline-block";
-    obstacle.style.animationPlayState = "paused";
-    stopScoreInterVal();
-    triggerJump.style.animationPlayState = "paused";
-    backGroundMusic.pause();
-  });
-
-  play.addEventListener("click", (e) => {
-    e.stopPropagation();
-    play.style.display = "none";
-    pauseButton.style.display = "inline-block";
-    obstacle.style.animationPlayState = "running";
-    triggerJump.style.animationPlayState = "running";
-    startScoreInterval();
-    backGroundMusic.play();
-  });
-}
 // Function to update the speed of the object comming towards the sprite
 function setAnimationSpeed(element, duration) {
   element.style.animationDuration = duration + "s";
@@ -545,12 +521,83 @@ function startScoreInterval(updateScoreTime) {
 }
 
 function stopScoreInterVal() {
-  clearInterval(scoreInterVal);
+  window.clearInterval(scoreInterVal);
 }
 
+let currentInterValTime = null;
+
 function updateScoreTimeFunction(time) {
-  stopScoreInterVal(); // Stops the current one and beggins a new one with the time varible
-  startScoreInterval(time); // Starts a new one
+  if (time !== currentInterValTime) {
+    currentInterValTime = time;
+    stopScoreInterVal(); // Stops the current one and beggins a new one with the time varible
+    startScoreInterval(time); // Starts a new one
+    console.log(currentInterValTime);
+  } else {
+    console.log("No change in interval time");
+  }
+}
+
+// Pause and start function to the game so players can pause the game if they want to, but if the side is reloaded the game will reset to the start menu
+const play = document.createElement("i");
+const pauseButton = document.createElement("i");
+const pausBox = document.querySelector("#paus-box");
+
+pauseButton.className = "fa-solid fa-pause";
+play.className = "fa-solid fa-play";
+
+function checkIfPlaying() {
+  console.log("hey");
+}
+
+function addPauseAndStartButton() {
+  pausBox.appendChild(pauseButton);
+  pausBox.appendChild(play);
+  pauseButton.style.display = "inline-block";
+  play.style.display = "none";
+
+  pauseButton.addEventListener("click", (e) => {
+    e.stopPropagation();
+    play.classList.add("disabled");
+    pauseButton.classList.add("disabled");
+
+    currentCharacter.style.animationPlayState = "paused";
+
+    setTimeout(() => {
+      play.classList.remove("disabled");
+      pauseButton.classList.remove("disabled");
+
+      pauseButton.style.display = "none";
+      play.style.display = "inline-block";
+
+      currentCharacter.style.animationPlayState = "paused";
+      triggerJump.style.animationPlayState = "paused";
+
+      stopScoreInterVal();
+      backGroundMusic.pause();
+      console.log("Worked1");
+    }, 600);
+  });
+
+  play.addEventListener("click", (e) => {
+    e.stopPropagation();
+    play.classList.add("disabled");
+
+    setTimeout(() => {
+      play.classList.remove("disabled");
+      pauseButton.classList.remove("disabled");
+
+      play.style.display = "none";
+      pauseButton.style.display = "inline-block";
+
+      currentCharacter.style.animationPlayState = "running";
+      triggerJump.style.animationPlayState = "running";
+
+      startScoreInterval(updateScoreTime);
+      updateScoreTimeFunction(updateScoreTime);
+      backGroundMusic.play();
+      console.log("Worked2");
+    }, 600);
+  });
 }
 
 // Adds the default animation for the jump effect on the sprite.
@@ -561,7 +608,7 @@ playBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   obstacle.classList.add("animation");
   startMenu.classList.add("displayNone");
-  startScoreInterval();
+  startScoreInterval(updateScoreTime);
   addPauseAndStartButton();
   playBackGroundMusic(backGroundMusic);
   removeChestsFromScreen();
@@ -607,7 +654,7 @@ playAgainButton.addEventListener("click", (e) => {
   scoreDisplay.textContent = "";
   newHighScoreSound.pause();
   deathsound.pause();
-  startScoreInterval();
+  startScoreInterval(updateScoreTime);
   hideMenu();
   addPauseAndStartButton();
   triggerJump.style.animationPlayState = "running";
@@ -633,7 +680,8 @@ function checkCollision() {
     // If collision is detected then the game will stop and a menu should pop up.
     console.log("Collision detected!");
     currentCharacter.classList.remove("animation");
-    currentCharacter.classList.add("resetPos");
+    document.body.classList.remove("animation");
+
     highScoreData(currentScore);
     scoreDisplay.textContent = currentScore;
     play.style.display = "none";
@@ -654,6 +702,7 @@ function checkCollision() {
     backGroundMusic.pause();
     getCoins(currentScore);
     stopScoreInterVal();
+
     addLevelDisplay();
 
     updateLevel(coinsFromCurrentGame);

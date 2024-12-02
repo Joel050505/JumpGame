@@ -32,6 +32,10 @@ body {
   height: 200px;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 #dirt {
   position: absolute;
   width: 100%;
@@ -119,10 +123,6 @@ body {
   position: absolute;
   left: 100%;
   bottom: 190px;
-}
-
-.resetPos {
-  left: 90%;
 }
 
 .animation {
