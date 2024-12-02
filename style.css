@@ -621,10 +621,4 @@ h3 {
     padding: 4px;
     font-size: 6px;
   }
-
-  #level-inner-container {
-    position: absolute;
-    top: 0;
-    right: 32%;
-  }
 }

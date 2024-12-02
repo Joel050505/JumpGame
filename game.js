@@ -151,6 +151,17 @@ const characters = {
   },
 };
 
+// Level display functions display that will remove it and add it
+const levelDisplay = document.getElementById("level-container");
+
+function removeLevelDisplay() {
+  levelDisplay.style.display = "none";
+}
+
+function addLevelDisplay() {
+  levelDisplay.style.display = "flex";
+}
+
 // Buy mechanism for characters so that players can buy characters and after they buy it it will update your gold
 
 function buyMechanism(buyButton, localStorageName, _characterName) {
@@ -371,7 +382,7 @@ function displayLevel(currentExperience, rate) {
     levelImg.src = "level images/New Piskel-10.png (1).png";
   } else if (currentExperience > rate * 9 && currentExperience <= rate * 10) {
     levelImg.src = "level images/New Piskel-11.png (2).png";
-  } else if (currentExperience > rate * 10 && currentExperience <= rate * 11) {
+  } else if (currentExperience > rate * 10 && currentExperience <= rate * 12) {
     levelImg.src = "level images/New Piskel-12.png (2).png";
   } else if (currentExperience >= experienceToLevelUp) {
     levelImg.src = "level images/New Piskel-1.png (3).png";
@@ -523,7 +534,7 @@ function checkCurrentScore(currentScore) {
     setTimeout(() => {
       coinRate = 5;
       setAnimationSpeed(carObstacle, 1);
-      hideObstacle(carObstacle, cone, obstacle, boxObstacle);
+      hideObstacle(carObstacle, cone, obstacle, boxObstacle, chestObstacle);
       currentCharacter = carObstacle;
     }, 1000);
   }
@@ -557,6 +568,7 @@ playBtn.addEventListener("click", (e) => {
   displayLevel(number);
   levelBox.style.display = "none";
   xpUntilNextLevel();
+  removeLevelDisplay();
 });
 
 // Event listener for space button down, if space is keydown it will jump and trigger an animation.
@@ -603,6 +615,7 @@ playAgainButton.addEventListener("click", (e) => {
   removeChestsFromScreen();
   levelBox.style.display = "none";
   xpUntilNextLevel();
+  removeLevelDisplay();
 });
 
 // Collision detection function.
@@ -641,6 +654,7 @@ function checkCollision() {
     backGroundMusic.pause();
     getCoins(currentScore);
     stopScoreInterVal();
+    addLevelDisplay();
 
     updateLevel(coinsFromCurrentGame);
     xpUntilNextLevel();
