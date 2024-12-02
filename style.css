@@ -494,7 +494,8 @@ h3 {
   #obstacle,
   #box-obstacle,
   #cone,
-  #chest-obstacle {
+  #chest-obstacle,
+  #car-obstacle {
     position: absolute;
     left: 100%;
     bottom: 95px;
@@ -621,7 +622,9 @@ h3 {
     font-size: 6px;
   }
 
-  #level-container {
-    right: -10px;
+  #level-inner-container {
+    position: absolute;
+    top: 0;
+    right: 32%;
   }
 }
