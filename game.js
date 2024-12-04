@@ -388,7 +388,10 @@ function displayLevel(currentExperience, rate) {
     levelImg.src = "level images/New Piskel-10.png (1).png";
   } else if (currentExperience > rate * 9 && currentExperience <= rate * 10) {
     levelImg.src = "level images/New Piskel-11.png (2).png";
-  } else if (currentExperience > rate * 10 && currentExperience <= rate * 12) {
+  } else if (
+    currentExperience > rate * 10 &&
+    currentExperience <= experienceToLevelUp - 1
+  ) {
     levelImg.src = "level images/New Piskel-12.png (2).png";
   } else if (currentExperience >= experienceToLevelUp) {
     levelImg.src = "level images/New Piskel-1.png (3).png";
@@ -465,48 +468,48 @@ function checkCurrentScore(currentScore) {
     coinRate = 10;
     hideObstacle(obstacle, boxObstacle, cone, chestObstacle, carObstacle);
     currentCharacter = obstacle;
-  } else if (currentScore > 10 && currentScore <= 40) {
+  } else if (currentScore > 20 && currentScore <= 40) {
     obstacle.classList.remove("animation");
     updateScoreTime = 1500;
     updateScoreTimeFunction(updateScoreTime);
+    hideObstacle(cone, obstacle, boxObstacle, chestObstacle, carObstacle);
+    coinRate = 9;
+    setAnimationSpeed(cone, 1.5);
 
     setTimeout(() => {
-      setAnimationSpeed(cone, 1.5);
-      hideObstacle(cone, obstacle, boxObstacle, chestObstacle, carObstacle);
-      coinRate = 9;
       currentCharacter = cone;
     }, 1000);
   } else if (currentScore > 40 && currentScore <= 70) {
     cone.classList.remove("animation");
     updateScoreTime = 1300;
     updateScoreTimeFunction(updateScoreTime);
+    setAnimationSpeed(boxObstacle, 1.3);
+    hideObstacle(boxObstacle, cone, obstacle, chestObstacle, carObstacle);
+    coinRate = 8;
 
     setTimeout(() => {
-      setAnimationSpeed(boxObstacle, 1.3);
-      hideObstacle(boxObstacle, cone, obstacle, chestObstacle, carObstacle);
-      coinRate = 8;
       currentCharacter = boxObstacle;
     }, 1000);
   } else if (currentScore > 70 && currentScore <= 110) {
     boxObstacle.classList.remove("animation");
     updateScoreTimeFunction(updateScoreTime);
     updateScoreTime = 1100;
+    setAnimationSpeed(chestObstacle, 1.1);
+    hideObstacle(chestObstacle, cone, obstacle, boxObstacle, carObstacle);
+    coinRate = 7;
 
     setTimeout(() => {
-      setAnimationSpeed(chestObstacle, 1.1);
-      hideObstacle(chestObstacle, cone, obstacle, boxObstacle, carObstacle);
-      coinRate = 7;
       currentCharacter = chestObstacle;
     }, 1000);
   } else if (currentScore > 110 && currentScore <= 400) {
     chestObstacle.classList.remove("animation");
     updateScoreTimeFunction(updateScoreTime);
     updateScoreTime = 1000;
+    coinRate = 5;
+    setAnimationSpeed(carObstacle, 1);
+    hideObstacle(carObstacle, cone, obstacle, boxObstacle, chestObstacle);
 
     setTimeout(() => {
-      coinRate = 5;
-      setAnimationSpeed(carObstacle, 1);
-      hideObstacle(carObstacle, cone, obstacle, boxObstacle, chestObstacle);
       currentCharacter = carObstacle;
     }, 1000);
   }
@@ -603,10 +606,10 @@ obstacle.classList.remove("animation");
 // The first screen you get to when page is loaded for the first time.
 playBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-  obstacle.classList.add("animation");
+  currentCharacter.classList.add("animation");
   startMenu.classList.add("displayNone");
   startScoreInterval(updateScoreTime);
-  addPauseAndStartButton();
+
   playBackGroundMusic(backGroundMusic);
   removeChestsFromScreen();
   displayLevel(number);
@@ -653,7 +656,7 @@ playAgainButton.addEventListener("click", (e) => {
   deathsound.pause();
   startScoreInterval(updateScoreTime);
   hideMenu();
-  addPauseAndStartButton();
+
   triggerJump.style.animationPlayState = "running";
   playBackGroundMusic(backGroundMusic);
   removeChestsFromScreen();
@@ -664,8 +667,8 @@ playAgainButton.addEventListener("click", (e) => {
 
 // Collision detection function.
 function checkCollision() {
-  const spriteRect = sprite.getBoundingClientRect();
-  const obstacleRect = currentCharacter.getBoundingClientRect();
+  const spriteRect = currentCharacter.getBoundingClientRect();
+  const obstacleRect = sprite.getBoundingClientRect();
 
   // Check if there’s an overlap.
   if (
@@ -676,8 +679,8 @@ function checkCollision() {
   ) {
     // If collision is detected then the game will stop and a menu should pop up.
     console.log("Collision detected!");
+
     currentCharacter.classList.remove("animation");
-    document.body.classList.remove("animation");
 
     highScoreData(currentScore);
     scoreDisplay.textContent = currentScore;
@@ -687,15 +690,9 @@ function checkCollision() {
     characterButton.classList.add("active");
     pausBox.style.display = "none";
 
-    chestObstacle.classList.remove("animation");
-    cone.classList.remove("animation");
-    obstacle.classList.remove("animation");
-    carObstacle.classList.remove("animation");
-    boxObstacle.classList.remove("animation");
-
     levelBox.style.display = "flex";
-
     closedChest.style.display = "flex";
+
     showMenu();
     backGroundMusic.pause();
     getCoins(currentScore);

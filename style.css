@@ -129,6 +129,12 @@ body {
   animation: fromLeftToRight 2s linear infinite;
 }
 
+.class-no-animation {
+  .class-no-animation {
+    animation: none;
+  }
+}
+
 @keyframes fromLeftToRight {
   0% {
     right: 0;
