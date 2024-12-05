@@ -9,9 +9,10 @@ const carObstacle = document.getElementById("car-obstacle");
 
 const triggerJump = document.querySelector("body");
 const scoreEl = document.querySelector("#score");
+const missionBox = document.getElementById("mission-container");
 
+// Play button and start menu
 const playAgainButton = document.querySelector("#playAgainBtn");
-
 const playBtn = document.querySelector("#play-btn");
 const startMenu = document.querySelector("#container");
 
@@ -74,7 +75,54 @@ function playBackGroundMusic(music) {
   music.volume = 0.05;
   music.currentTime = 0;
 }
+
+// Daily challenge/mission system that you can do so you even have more reasons for playing the game
+
 const scoreDisplayText = document.getElementById("scoreDisplayText");
+const missionName = document.getElementById("mission-name");
+const missionAmount = document.getElementById("mission-amount");
+
+const missionScore = document.getElementById("mission-count");
+missionScore.textContent = localStorage.getItem("scored");
+
+function hideMissionBord() {
+  missionBox.style.display = "none";
+}
+
+function showMissionBord() {
+  missionBox.style.display = "flex";
+}
+
+let isDone = false;
+
+function updateMissionScore(score) {
+  let scoredEnough = Number(localStorage.getItem("scored"));
+  if (scoredEnough < 500 && !isDone) {
+    let scored = Number(localStorage.getItem("scored")) + score;
+    missionScore.textContent = scored;
+    localStorage.setItem("scored", scored);
+    console.log("worked");
+    console.log(scoredEnough);
+  }
+}
+
+function checkMission() {
+  let scoredEnough = Number(localStorage.getItem("scored"));
+  if (scoredEnough >= 500 && !isDone) {
+    localStorage.setItem("coins", Number(localStorage.getItem("coins")) + 25);
+    coins.textContent = localStorage.getItem("coins");
+    missionScore.textContent = 0;
+    localStorage.setItem("scored", 0);
+    isDone = false;
+
+    // setTimeout(() => {
+    //   missionAmount.textContent = " 75";
+    //   missionName.textContent = "Collect 75 coins";
+    // }, 5000);
+  }
+}
+
+checkMission();
 
 // Storing the highscore in the local storage
 // Function that will check ur highscore
@@ -83,9 +131,7 @@ function highScoreData(score) {
     localStorage.setItem("highScore", score);
     scoreDisplay.textContent = currentScore;
     scoreDisplayText.textContent = "Your new highscore is: ";
-    console.log(scoreDisplay.textContent);
     playSound(newHighScoreSound);
-    console.log("worked");
   } else {
     playSound(deathsound);
     deathsound.playbackRate = 1.2;
@@ -108,10 +154,12 @@ allButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     buttonSound.play();
     buttonSound.volume = 0.4;
+
     e.stopPropagation();
+
     setTimeout(() => {
       buttonSound.remove();
-    }, 500);
+    }, 300);
   });
 });
 
@@ -145,13 +193,13 @@ const characters = {
   willieCharacter: { life: 1, coinsMultipliyer: 1, unlocked: true },
   roboSamCharacter: {
     life: 1,
-    coinsMultipliyer: 1.5,
+    coinsMultipliyer: 1.75,
     cost: 450,
     unlocked: JSON.parse(localStorage.getItem("roboSamUnlocked")) || false,
   },
   zigZaneCharacter: {
     life: 2,
-    coinsMultipliyer: 1.75,
+    coinsMultipliyer: 2.75,
     cost: 1000,
     unlocked: JSON.parse(localStorage.getItem("zigZaneUnlocked")) || false,
   },
@@ -176,7 +224,7 @@ function buyMechanism(buyButton, localStorageName, _characterName) {
     let cost = _characterName.cost;
     if (yourCoins >= cost) {
       localStorage.setItem("coins", yourCoins - cost);
-      console.log(yourCoins);
+
       coins.textContent = localStorage.getItem("coins");
       buyButton.textContent = "Unlocked";
       localStorage.setItem(localStorageName, true);
@@ -245,7 +293,7 @@ zigZaneMenuImg.addEventListener("click", (e) => {
   e.stopPropagation();
   if (characters.zigZaneCharacter.unlocked) {
     disableOtherCharacter(zigZane, willie, roboSam);
-    console.log(characters.zigZaneCharacter.unlocked);
+
     localStorage.setItem(
       "multiplyer",
       characters.zigZaneCharacter.coinsMultipliyer
@@ -256,6 +304,7 @@ zigZaneMenuImg.addEventListener("click", (e) => {
 characterButton.addEventListener("click", () => {
   startMenu.classList.add("displayNone");
   characterMenu.classList.add("active");
+  hideMissionBord();
 });
 
 characterButton2.addEventListener("click", () => {
@@ -263,6 +312,7 @@ characterButton2.addEventListener("click", () => {
   characterBackBtn.style.display = "none";
   characterAgainBackBtn.style.display = "flex";
   hideMenu();
+  hideMissionBord();
 });
 
 characterAgainBackBtn.style.display = "none";
@@ -270,11 +320,14 @@ characterAgainBackBtn.style.display = "none";
 characterBackBtn.addEventListener("click", () => {
   startMenu.classList.remove("displayNone");
   characterMenu.classList.remove("active");
+  missionBox.style.display = "flex";
+  showMissionBord();
 });
 
 characterAgainBackBtn.addEventListener("click", () => {
   characterMenu.classList.remove("active");
   showMenu();
+  showMissionBord();
 });
 
 // Coin/currency for the game
@@ -299,11 +352,16 @@ openChest.addEventListener("click", (e) => {
 
 coins.textContent = localStorage.getItem("coins");
 let coinRate = 10;
-let Multipliyer = Number(localStorage.getItem("multiplyer"));
+let multipliyer;
+setInterval(() => {
+  multipliyer = Number(localStorage.getItem("multiplyer"));
+}, 1000);
+
 let coinsFromCurrentGame = 0;
 
 function getCoins(score) {
-  coinsFromCurrentGame = Math.round(score / coinRate) * Multipliyer;
+  coinsFromCurrentGame = Math.round((score / coinRate) * multipliyer);
+
   let currentCoins = Number(localStorage.getItem("coins"));
 
   localStorage.setItem("coins", currentCoins + coinsFromCurrentGame);
@@ -343,7 +401,6 @@ function updateLevel(coins) {
 
   let rate = Math.round(experienceToLevelUp / 12);
 
-  console.log("rate: ", rate, "amoun to level up: ", experienceToLevelUp, " ");
   let currentExperience = Number(localStorage.getItem("experience")) + xp;
 
   Number(localStorage.setItem("experience", currentExperience));
@@ -609,7 +666,7 @@ playBtn.addEventListener("click", (e) => {
   currentCharacter.classList.add("animation");
   startMenu.classList.add("displayNone");
   startScoreInterval(updateScoreTime);
-
+  hideMissionBord();
   playBackGroundMusic(backGroundMusic);
   removeChestsFromScreen();
   displayLevel(number);
@@ -656,7 +713,7 @@ playAgainButton.addEventListener("click", (e) => {
   deathsound.pause();
   startScoreInterval(updateScoreTime);
   hideMenu();
-
+  hideMissionBord();
   triggerJump.style.animationPlayState = "running";
   playBackGroundMusic(backGroundMusic);
   removeChestsFromScreen();
@@ -697,8 +754,12 @@ function checkCollision() {
     backGroundMusic.pause();
     getCoins(currentScore);
     stopScoreInterVal();
-
+    showMissionBord();
     addLevelDisplay();
+
+    updateMissionScore(currentScore);
+
+    checkMission();
 
     updateLevel(coinsFromCurrentGame);
     xpUntilNextLevel();
