@@ -509,12 +509,21 @@ h3 {
   text-shadow: 2px 2px black, 4px 4px #555;
 }
 
+.fa-scroll {
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+  top: 63%;
+  color: white;
+}
+
 #mission-box p {
   padding: 10px;
 }
 
 #mission-count-box {
   font-size: 12px;
+  list-style-type: square;
 }
 
 #mission-name {
@@ -569,6 +578,14 @@ h3 {
 
   #willie {
     width: 50px;
+  }
+
+  .fa-scroll {
+    font-size: 8px;
+    position: absolute;
+    left: 12px;
+    top: 60%;
+    color: white;
   }
 
   #obstacle,
@@ -632,6 +649,7 @@ h3 {
   #mission-box {
     width: 100px;
     height: 150px;
+    padding: 2px;
   }
 
   #mission-container h4 {
