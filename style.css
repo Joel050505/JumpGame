@@ -555,6 +555,18 @@ h3 {
     left: 30px;
   }
 
+  #mission-reward {
+    font-size: 5px;
+    text-shadow: 1px 1px black, 1px 1px #555;
+  }
+  #reward-amount {
+    font-size: 7px;
+    letter-spacing: normal;
+  }
+  #coin-img2 {
+    width: 10px;
+  }
+
   #willie {
     width: 50px;
   }
@@ -613,16 +625,17 @@ h3 {
   }
 
   #mission-container {
-    right: 130px;
+    right: 110px;
+    top: 10%;
   }
 
   #mission-box {
-    width: 120px;
+    width: 100px;
     height: 150px;
   }
 
   #mission-container h4 {
-    font-size: 14px;
+    font-size: 10px;
   }
 
   #mission-name {
