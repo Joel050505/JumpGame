@@ -645,7 +645,7 @@ h3 {
 
   #mission-container {
     right: 110px;
-    top: 20%;
+    top: 13%;
   }
 
   #mission-box {
@@ -756,8 +756,7 @@ h3 {
     padding: 4px;
     font-size: 6px;
   }
-
   #container {
-    top: 40%;
+    top: 30%;
   }
 }
