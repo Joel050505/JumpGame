@@ -645,7 +645,7 @@ h3 {
 
   #mission-container {
     right: 110px;
-    top: 10%;
+    top: 20%;
   }
 
   #mission-box {
@@ -656,10 +656,12 @@ h3 {
 
   #mission-container h4 {
     font-size: 10px;
+    text-shadow: 1px 1px black, 2px 2px #555;
   }
 
   #mission-name {
     font-size: 8px;
+    text-shadow: 1px 1px black, 1px 1px #555;
   }
 
   #mission-count-box {
@@ -753,5 +755,9 @@ h3 {
   #level-inner-box p {
     padding: 4px;
     font-size: 6px;
+  }
+
+  #container {
+    top: 40%;
   }
 }
