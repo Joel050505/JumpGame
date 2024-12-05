@@ -530,6 +530,11 @@ h3 {
   font-size: 16px;
 }
 
+#mission-count,
+#mission-amount {
+  text-decoration: 1px 1px black, 1px 1px #555;
+}
+
 #mission-box {
   position: absolute;
   display: flex;
@@ -547,9 +552,9 @@ h3 {
 
 #mission-count-box {
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 1px;
   color: white;
-  text-shadow: none;
+  text-shadow: 1px 1px black;
 }
 
 #reward-amount {
