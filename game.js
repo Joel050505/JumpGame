@@ -47,6 +47,7 @@ document.getElementById("info-btn").addEventListener("click", () => {
   );
 });
 
+console.log("workd");
 // Chest and coins
 const openChest = document.getElementById("openChest");
 const closedChest = document.getElementById("closedChest");
