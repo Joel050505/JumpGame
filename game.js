@@ -40,14 +40,14 @@ const newHighScoreSound = document.getElementById("new-high-score");
 const backGroundMusic = document.getElementById("background-music");
 const buttonSound = document.getElementById("button-click-sound");
 
-document.getElementById("info-btn").addEventListener("click", () => {
-  alert(
-    Number(localStorage.getItem("xpToLevelUp")) -
-      Number(localStorage.getItem("experience"))
-  );
-});
+// document.getElementById("info-btn").addEventListener("click", () => {
+//   alert(
+//     Number(localStorage.getItem("xpToLevelUp")) -
+//       Number(localStorage.getItem("experience"))
+//   );
+// });
 
-console.log("workd");
+// console.log("workd");
 // Chest and coins
 const openChest = document.getElementById("openChest");
 const closedChest = document.getElementById("closedChest");
