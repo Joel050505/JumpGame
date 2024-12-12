@@ -139,7 +139,8 @@ body {
   transition: all ease-in-out 0.3s;
 }
 
-.toggle-on {
+.toggle-on1,
+.toggle-on2 {
   display: none;
 }
 

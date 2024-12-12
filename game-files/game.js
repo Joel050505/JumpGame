@@ -66,20 +66,39 @@ const levelBox = document.getElementById("until-highScore");
 
 // Night and day mode
 
-const switchOffBtn = document.querySelector(".toggle-off");
-const switchOnBtn = document.querySelector(".toggle-on");
+const switchOffBtn1 = document.querySelector(".toggle-off1");
+const switchOnBtn1 = document.querySelector(".toggle-on1");
 
-switchOffBtn.addEventListener("click", (e) => {
+const switchOffBtn2 = document.querySelector(".toggle-off2");
+const switchOnBtn2 = document.querySelector(".toggle-on2");
+
+switchOffBtn1.addEventListener("click", (e) => {
   e.stopPropagation();
-  switchOnBtn.style.display = "block";
-  switchOffBtn.style.display = "none";
+  switchOnBtn1.style.display = "block";
+  switchOffBtn1.style.display = "none";
   document.body.style.backgroundImage = "url('pictures/11.png')";
+  document.body.style.backgroundPosition = "bottom";
 });
 
-switchOnBtn.addEventListener("click", (e) => {
+switchOnBtn1.addEventListener("click", (e) => {
   e.stopPropagation();
-  switchOffBtn.style.display = "block";
-  switchOnBtn.style.display = "none";
+  switchOffBtn1.style.display = "block";
+  switchOnBtn1.style.display = "none";
+  document.body.style.backgroundImage = "url('pictures/10.png')";
+});
+
+switchOffBtn2.addEventListener("click", (e) => {
+  e.stopPropagation();
+  switchOnBtn2.style.display = "block";
+  switchOffBtn2.style.display = "none";
+  document.body.style.backgroundImage = "url('pictures/11.png')";
+  document.body.style.backgroundPosition = "bottom";
+});
+
+switchOnBtn2.addEventListener("click", (e) => {
+  e.stopPropagation();
+  switchOffBtn2.style.display = "block";
+  switchOnBtn2.style.display = "none";
   document.body.style.backgroundImage = "url('pictures/10.png')";
 });
 
