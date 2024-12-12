@@ -291,13 +291,15 @@ h3 {
 }
 
 #boxframe {
-  width: 800px;
+  width: 600px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 40px;
-  /* overflow-x: scroll; */
+  overflow-x: auto;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .character-menu-box {
@@ -321,6 +323,7 @@ h3 {
 }
 
 .character-box {
+  align-items: center;
   width: 200px;
   height: 300px;
   border: 2px solid black;
@@ -763,6 +766,12 @@ h3 {
     padding: 4px;
     font-size: 6px;
   }
+
+  #boxframe {
+    width: 340px;
+    overflow-x: auto;
+  }
+
   #container {
     top: 32%;
   }
@@ -799,5 +808,9 @@ h3 {
 
   body {
     animation: moveBackground 900s linear infinite;
+  }
+
+  #greg-img {
+    width: 100px;
   }
 }
