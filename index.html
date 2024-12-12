@@ -13,8 +13,8 @@
     />
 
     <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
   </head>
   <body>
@@ -43,11 +43,6 @@
         Score:
         <p id="score">0</p>
       </div>
-
-      <!-- <div id="until-highScore">
-        <p>Highscore:</p>
-        <p id="until-highScore-display">0</p>
-      </div> -->
 
       <div id="sprite">
         <img
@@ -106,6 +101,9 @@
           <p id="scoreDisplayText">Your Score Was:</p>
           <p id="scoreDisplay"></p>
         </div>
+        <p id="current-high-score">
+          current highscore: <span class="score">0</span>
+        </p>
         <button class="characters-btn2">Characters</button>
 
         <button id="playAgainBtn">Play Again!</button>
@@ -131,6 +129,13 @@
         <div>
           <button class="characters-btn btn">Characters</button>
         </div>
+        <div class="toggle-on">
+          <i class="fa-solid fa-toggle-on toggle"></i>
+        </div>
+
+        <div class="toggle-off">
+          <i class="fa-solid fa-toggle-off toggle"></i>
+        </div>
       </div>
       <div id="character-container">
         <div class="">
@@ -141,7 +146,8 @@
         </div>
 
         <div id="boxframe">
-          <div id="character-menu-box">
+          <!-- Willie -->
+          <div class="character-menu-box">
             <div class="character-one character-box">
               <p class="char-name">Willie</p>
               <p class="x-coins">1.0x coins</p>
@@ -152,7 +158,10 @@
                 width="125"
               />
             </div>
-
+            <button class="characters-prices" id="price1">Unlocked</button>
+          </div>
+          <!-- Robo Sam -->
+          <div class="character-menu-box">
             <div class="character-two character-box">
               <p class="char-name">Robo Sam</p>
               <p class="x-coins">1.75x coins</p>
@@ -163,6 +172,18 @@
                 width="125"
               />
             </div>
+            <button class="characters-prices" id="price2">
+              450<img
+                id="coin1"
+                src="pictures/New Piskel (29).gif"
+                alt=""
+                width="20"
+              />
+            </button>
+          </div>
+
+          <!-- Zig Zane -->
+          <div class="character-menu-box">
             <div class="character-three character-box">
               <p class="char-name">Zig Zane</p>
               <p class="x-coins">2.75x coins</p>
@@ -173,18 +194,8 @@
                 width="125"
               />
             </div>
-          </div>
-          <div id="characters-prices">
-            <button id="price1">Unlocked</button>
-            <button id="price2">
-              450<img
-                id="coin1"
-                src="pictures/New Piskel (29).gif"
-                alt=""
-                width="20"
-              />
-            </button>
-            <button id="price3">
+
+            <button class="characters-prices" id="price3">
               1000<img
                 id="coin2"
                 src="pictures/New Piskel (29).gif"
@@ -193,6 +204,22 @@
               />
             </button>
           </div>
+
+          <!-- Greg -->
+          <!-- <div class="character-menu-box">
+            <div class="character-four character-box">
+              <p class="char-name">Greg</p>
+              <p class="x-coins">3.75x coins</p>
+            </div>
+            <button class="characters-prices" id="price4">
+              1500<img
+                id="coin2"
+                src="pictures/New Piskel (29).gif"
+                alt=""
+                width="20"
+              />
+            </button>
+          </div> -->
         </div>
 
         <div>
@@ -244,13 +271,15 @@
     </div>
     <div id="mission-container">
       <div id="mission-box">
-        <h4>Daily mission</h4>
+        <h4>Mission</h4>
 
-        <p id="mission-name">Score 500 points</p>
+        <p id="mission-name"></p>
         <p id="mission-count-box">
-          <span><i class="fa-solid fa-scroll"></i></span>
+          <span>
+            <i class="fa-solid fa-scroll"></i>
+          </span>
           <span id="mission-count">0</span>
-          / <span id="mission-amount">500</span>
+          / <span id="mission-amount"></span>
         </p>
         <p id="mission-reward">
           Reward: <span id="reward-amount">25</span>x<img
@@ -263,6 +292,6 @@
       </div>
     </div>
 
-    <script src="game.js"></script>
+    <script type="module" src="/game-files/game.js"></script>
   </body>
 </html>

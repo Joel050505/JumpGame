@@ -47,7 +47,6 @@ const buttonSound = document.getElementById("button-click-sound");
 //   );
 // });
 
-// console.log("workd");
 // Chest and coins
 const openChest = document.getElementById("openChest");
 const closedChest = document.getElementById("closedChest");
@@ -62,9 +61,31 @@ const scoreDisplay = document.getElementById("scoreDisplay");
 const untilHighScoreDisplay = document.getElementById(
   "until-highScore-display"
 );
+
 const levelBox = document.getElementById("until-highScore");
 
+// Night and day mode
+
+const switchOffBtn = document.querySelector(".toggle-off");
+const switchOnBtn = document.querySelector(".toggle-on");
+
+switchOffBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  switchOnBtn.style.display = "block";
+  switchOffBtn.style.display = "none";
+  document.body.style.backgroundImage = "url('pictures/11.png')";
+});
+
+switchOnBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  switchOffBtn.style.display = "block";
+  switchOnBtn.style.display = "none";
+  document.body.style.backgroundImage = "url('pictures/10.png')";
+});
+
 untilHighScoreDisplay.textContent = localStorage.getItem("highScore");
+document.querySelector(".score").textContent =
+  localStorage.getItem("highScore");
 
 levelBox.style.display = "flex";
 
@@ -77,54 +98,6 @@ function playBackGroundMusic(music) {
   music.volume = 0.05;
   music.currentTime = 0;
 }
-
-// Daily challenge/mission system that you can do so you even have more reasons for playing the game
-
-const scoreDisplayText = document.getElementById("scoreDisplayText");
-const missionName = document.getElementById("mission-name");
-const missionAmount = document.getElementById("mission-amount");
-
-const missionScore = document.getElementById("mission-count");
-missionScore.textContent = localStorage.getItem("scored");
-
-function hideMissionBord() {
-  missionBox.style.display = "none";
-}
-
-function showMissionBord() {
-  missionBox.style.display = "flex";
-}
-
-let isDone = false;
-
-function updateMissionScore(score) {
-  let scoredEnough = Number(localStorage.getItem("scored"));
-  if (scoredEnough < 500 && !isDone) {
-    let scored = Number(localStorage.getItem("scored")) + score;
-    missionScore.textContent = scored;
-    localStorage.setItem("scored", scored);
-    console.log("worked");
-    console.log(scoredEnough);
-  }
-}
-
-function checkMission() {
-  let scoredEnough = Number(localStorage.getItem("scored"));
-  if (scoredEnough >= 500 && !isDone) {
-    localStorage.setItem("coins", Number(localStorage.getItem("coins")) + 25);
-    coins.textContent = localStorage.getItem("coins");
-    missionScore.textContent = 0;
-    localStorage.setItem("scored", 0);
-    isDone = false;
-
-    // setTimeout(() => {
-    //   missionAmount.textContent = " 75";
-    //   missionName.textContent = "Collect 75 coins";
-    // }, 5000);
-  }
-}
-
-checkMission();
 
 // Storing the highscore in the local storage
 // Function that will check ur highscore
@@ -148,6 +121,39 @@ function playSound(sound) {
   sound.volume = 0.1;
   sound.currentTime = 0;
 }
+
+// Daily challenge/mission system that you can do so you even have more reasons for playing the game
+
+const scoreDisplayText = document.getElementById("scoreDisplayText");
+const missionName = document.getElementById("mission-name");
+const missionAmount = document.getElementById("mission-amount");
+
+const missionScore = document.getElementById("mission-count");
+
+if (localStorage.getItem("mission") === null) {
+  localStorage.setItem("mission", "mission1");
+}
+
+if (localStorage.getItem("coinsCollected") === null) {
+  localStorage.setItem("coinsCollected", 0);
+}
+
+if (localStorage.getItem("mission") === "mission1") {
+  missionAmount.textContent = 500;
+  missionScore.textContent = localStorage.getItem("scored");
+  missionName.textContent = "Score 500 points";
+} else if (localStorage.getItem("mission") === "mission2") {
+  missionAmount.textContent = 75;
+  missionScore.textContent = localStorage.getItem("coinsCollected");
+  missionName.textContent = "Collect 75 coins";
+}
+
+import {
+  checkMission,
+  hideMissionBord,
+  showMissionBord,
+  updateMissionScore,
+} from "./mission.js";
 
 // Make a nice sound when you press on a button
 const allButtons = document.querySelectorAll("button");
@@ -394,81 +400,7 @@ if (localStorage.getItem("zigZaneUnlocked") === null) {
   localStorage.setItem("zigZaneUnlocked", false);
 }
 
-const levelImg = document.getElementById("level-img");
-
-function updateLevel(coins) {
-  let xp = coins * 5;
-
-  let experienceToLevelUp = Number(localStorage.getItem("xpToLevelUp"));
-
-  let rate = Math.round(experienceToLevelUp / 12);
-
-  let currentExperience = Number(localStorage.getItem("experience")) + xp;
-
-  Number(localStorage.setItem("experience", currentExperience));
-
-  console.log(
-    "rate: ",
-    rate,
-    "amoun to level up: ",
-    experienceToLevelUp,
-    "current experience: ",
-    currentExperience
-  );
-
-  displayLevel(currentExperience);
-}
-
-// localStorage.setItem("xpToLevelUp", 130);
-
-function displayLevel(currentExperience, rate) {
-  rate = Math.round(Number(localStorage.getItem("xpToLevelUp")) / 12);
-  let experienceToLevelUp = Number(localStorage.getItem("xpToLevelUp"));
-
-  if (currentExperience == 0) {
-    levelImg.src = "level images/New Piskel-1.png (3).png";
-  } else if (currentExperience > 0 && currentExperience <= rate * 1) {
-    levelImg.src = "level images/New Piskel-2.png (4).png";
-  } else if (currentExperience > rate && currentExperience <= rate * 2) {
-    levelImg.src = "level images/New Piskel-3.png (1).png";
-  } else if (currentExperience > rate * 2 && currentExperience <= rate * 3) {
-    levelImg.src = "level images/New Piskel-4.png (1).png";
-  } else if (currentExperience > rate * 3 && currentExperience <= rate * 4) {
-    levelImg.src = "level images/New Piskel-5.png (1).png";
-  } else if (currentExperience > rate * 4 && currentExperience <= rate * 5) {
-    levelImg.src = "level images/New Piskel-6.png (1).png";
-  } else if (currentExperience > rate * 5 && currentExperience <= rate * 6) {
-    levelImg.src = "level images/New Piskel-7.png (1).png";
-  } else if (currentExperience > rate * 6 && currentExperience <= rate * 7) {
-    levelImg.src = "level images/New Piskel-8.png (1).png";
-  } else if (currentExperience > rate * 7 && currentExperience <= rate * 8) {
-    levelImg.src = "level images/New Piskel-9.png (1).png";
-  } else if (currentExperience > rate * 8 && currentExperience <= rate * 9) {
-    levelImg.src = "level images/New Piskel-10.png (1).png";
-  } else if (currentExperience > rate * 9 && currentExperience <= rate * 10) {
-    levelImg.src = "level images/New Piskel-11.png (2).png";
-  } else if (
-    currentExperience > rate * 10 &&
-    currentExperience <= experienceToLevelUp - 1
-  ) {
-    levelImg.src = "level images/New Piskel-12.png (2).png";
-  } else if (currentExperience >= experienceToLevelUp) {
-    levelImg.src = "level images/New Piskel-1.png (3).png";
-    document.querySelector("#level").textContent =
-      Number(localStorage.getItem("level")) + 1;
-
-    localStorage.setItem("experience", 0);
-    localStorage.setItem(
-      "xpToLevelUp",
-      Number(localStorage.getItem("xpToLevelUp")) + 20
-    );
-
-    document.querySelector("#level").textContent =
-      Number(localStorage.getItem("level")) + 1;
-
-    localStorage.setItem("level", Number(localStorage.getItem("level")) + 1);
-  }
-}
+import { updateLevel, displayLevel } from "./level.js";
 
 let number = Number(localStorage.getItem("experience"));
 
@@ -589,9 +521,6 @@ function updateScoreTimeFunction(time) {
     currentInterValTime = time;
     stopScoreInterVal(); // Stops the current one and beggins a new one with the time varible
     startScoreInterval(time); // Starts a new one
-    console.log(currentInterValTime);
-  } else {
-    console.log("No change in interval time");
   }
 }
 
@@ -602,10 +531,6 @@ const pausBox = document.querySelector("#paus-box");
 
 pauseButton.className = "fa-solid fa-pause";
 play.className = "fa-solid fa-play";
-
-function checkIfPlaying() {
-  console.log("hey");
-}
 
 function addPauseAndStartButton() {
   pausBox.appendChild(pauseButton);
@@ -736,9 +661,7 @@ function checkCollision() {
     spriteRect.top < obstacleRect.bottom &&
     spriteRect.bottom > obstacleRect.top
   ) {
-    // If collision is detected then the game will stop and a menu should pop up.
-    console.log("Collision detected!");
-
+    // If collision is detected then the game will stop and a game over menu will pop up u can see ur highscore there and chose character
     currentCharacter.classList.remove("animation");
 
     highScoreData(currentScore);
@@ -759,7 +682,7 @@ function checkCollision() {
     showMissionBord();
     addLevelDisplay();
 
-    updateMissionScore(currentScore);
+    updateMissionScore(currentScore, coinsFromCurrentGame);
 
     checkMission();
 
