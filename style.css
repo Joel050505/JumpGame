@@ -44,6 +44,11 @@ body {
 #willie {
   display: inline-block;
 }
+
+#greg {
+  display: none;
+}
+
 #zig-zane {
   display: none;
 }
@@ -123,10 +128,23 @@ body {
   background-color: #005977;
 }
 
-.toggle {
+.fa-toggle-on,
+.fa-toggle-off {
   font-size: 40px;
   color: white;
   cursor: pointer;
+}
+
+.toggle-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.toggle-text {
+  font-size: 20px;
+  color: white;
 }
 
 .fa-toggle-off,
@@ -584,6 +602,15 @@ h3 {
     width: 60px;
   }
 
+  #greg {
+    width: 70px;
+  }
+
+  .toggle-text {
+    font-size: 20px;
+    color: white;
+  }
+
   #willie {
     width: 50px;
   }
@@ -812,5 +839,10 @@ h3 {
 
   #greg-img {
     width: 100px;
+  }
+
+  .toggle-text {
+    font-size: 12px;
+    color: white;
   }
 }

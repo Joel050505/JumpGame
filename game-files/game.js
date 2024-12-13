@@ -29,9 +29,11 @@ const characterAgainBackBtn = document.querySelector(
 const willieMenuImg = document.querySelector(".character-one");
 const roboSamMenuImg = document.querySelector(".character-two");
 const zigZaneMenuImg = document.querySelector(".character-three");
+const gregMenuImg = document.querySelector(".character-four");
 const willie = document.querySelector("#willie");
 const roboSam = document.querySelector("#robo-sam");
 const zigZane = document.querySelector("#zig-zane");
+const greg = document.querySelector("#greg");
 
 // Sound effects
 const jumpSound = document.getElementById("jump-sound");
@@ -55,6 +57,7 @@ const chestContainer = document.getElementById("chest-container");
 const coins = document.getElementById("coins");
 const roboSamBuyButton = document.getElementById("price2");
 const zigZaneBuyButton = document.getElementById("price3");
+const gregBuyButton = document.getElementById("price4");
 
 // Display thing, display score and display how many until your current highscore
 const scoreDisplay = document.getElementById("scoreDisplay");
@@ -64,8 +67,7 @@ const untilHighScoreDisplay = document.getElementById(
 
 const levelBox = document.getElementById("until-highScore");
 
-// Night and day mode
-
+// Night and day, button that you can toggle to make the backgroudn change between night and day/sunrise/morning ish picture
 const switchOffBtn1 = document.querySelector(".toggle-off1");
 const switchOnBtn1 = document.querySelector(".toggle-on1");
 
@@ -230,6 +232,12 @@ const characters = {
     cost: 1000,
     unlocked: JSON.parse(localStorage.getItem("zigZaneUnlocked")) || false,
   },
+  gregCharacter: {
+    life: 2,
+    coinsMultipliyer: 3.75,
+    cost: 1500,
+    unlocked: JSON.parse(localStorage.getItem("gregUnlocked")) || false,
+  },
 };
 
 // Level display functions display that will remove it and add it
@@ -268,21 +276,23 @@ function buyMechanism(buyButton, localStorageName, _characterName) {
 
 buyMechanism(roboSamBuyButton, "roboSamUnlocked", characters.roboSamCharacter);
 buyMechanism(zigZaneBuyButton, "zigZaneUnlocked", characters.zigZaneCharacter);
+buyMechanism(gregBuyButton, "gregUnlocked", characters.gregCharacter);
 
 // Logic for every character so you have to unlock 2 of them so the game will have a goal
 
 characterMenu.classList.add("displayNone");
 
-function disableOtherCharacter(display, notDisplay1, notDisplay2) {
+function disableOtherCharacter(display, notDisplay1, notDisplay2, notDisplay3) {
   display.style.display = "inline-block";
   notDisplay1.style.display = "none";
   notDisplay2.style.display = "none";
+  notDisplay3.style.display = "none";
 }
 
-willieMenuImg.addEventListener("click", (e) => {
-  e.stopPropagation();
-  disableOtherCharacter(willie, roboSam, zigZane);
-});
+// willieMenuImg.addEventListener("click", (e) => {
+//   e.stopPropagation();
+//   disableOtherCharacter(willie, roboSam, zigZane);
+// });
 
 function isUnlocked(char, button) {
   if (char.unlocked) {
@@ -293,12 +303,14 @@ function isUnlocked(char, button) {
 
 isUnlocked(characters.roboSamCharacter, roboSamBuyButton);
 isUnlocked(characters.zigZaneCharacter, zigZaneBuyButton);
+isUnlocked(characters.gregCharacter, gregBuyButton);
+
 localStorage.setItem("multiplyer", characters.willieCharacter.coinsMultipliyer);
 
 // Character select menu, so that you can select a character
 willieMenuImg.addEventListener("click", (e) => {
   e.stopPropagation();
-  disableOtherCharacter(willie, roboSam, zigZane);
+  disableOtherCharacter(willie, roboSam, zigZane, greg);
   localStorage.setItem(
     "multiplyer",
     characters.willieCharacter.coinsMultipliyer
@@ -308,7 +320,7 @@ willieMenuImg.addEventListener("click", (e) => {
 roboSamMenuImg.addEventListener("click", (e) => {
   e.stopPropagation();
   if (characters.roboSamCharacter.unlocked) {
-    disableOtherCharacter(roboSam, willie, zigZane);
+    disableOtherCharacter(roboSam, willie, zigZane, greg);
     localStorage.setItem(
       "multiplyer",
       characters.roboSamCharacter.coinsMultipliyer
@@ -319,13 +331,22 @@ roboSamMenuImg.addEventListener("click", (e) => {
 zigZaneMenuImg.addEventListener("click", (e) => {
   e.stopPropagation();
   if (characters.zigZaneCharacter.unlocked) {
-    disableOtherCharacter(zigZane, willie, roboSam);
+    disableOtherCharacter(zigZane, willie, roboSam, greg);
 
     localStorage.setItem(
       "multiplyer",
       characters.zigZaneCharacter.coinsMultipliyer
     );
   }
+});
+
+gregMenuImg.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (characters.gregCharacter.unlocked) {
+    disableOtherCharacter(greg, willie, roboSam, zigZane);
+    document.body.style.backgroundImage = "url('pictures/7.png')";
+  }
+  localStorage.setItem("multiplyer", characters.gregCharacter.coinsMultipliyer);
 });
 
 characterButton.addEventListener("click", () => {
@@ -417,6 +438,9 @@ if (localStorage.getItem("roboSamUnlocked") === null) {
 }
 if (localStorage.getItem("zigZaneUnlocked") === null) {
   localStorage.setItem("zigZaneUnlocked", false);
+}
+if (localStorage.getItem("gregUnlocked") === null) {
+  localStorage.setItem("gregUnlocked", false);
 }
 
 import { updateLevel, displayLevel } from "./level.js";
