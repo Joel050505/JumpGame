@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Press Start 2P", monospace;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  font-size: 26px;
+  text-decoration: none;
+  align-items: center;
+  background-color: black;
+}
+header p {
+  font-size: 20px;
+  color: white;
+}
+
+header .navBar1 a {
+  color: white;
+  display: none;
+}
+
+header .navBar2 a {
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+}
+
+header .navBar2 a:hover {
+  /* color: gray; */
+  color: yellow;
+  transition: all ease-in-out 0.2s;
+}
+
+header .navBar2 {
+  display: flex;
+  padding: 30px;
+  background-color: black;
+  flex-direction: column;
+  gap: 30px;
+  position: fixed;
+  right: -200px;
+  top: 60px;
+  border-bottom-left-radius: 20px;
+  transition: all ease-in-out 0.7s;
+  z-index: 10;
+  overflow-y: hidden;
+}
+
+.fa-bars {
+  display: block;
+}
+
+.gameBoxText {
+  color: #222222;
+}
+
+.fa-bars,
+.fa-xmark {
+  font-size: 25px;
+  cursor: pointer;
+  color: white;
+}
+
+header .fa-xmark {
+  display: none;
+}
+
+.fa-bars:hover,
+.fa-xmark:hover {
+  color: rgb(198, 198, 198);
+  transition: all ease-in-out 0.2s;
+}
+
+#willie-pic {
+  width: 300px;
+  padding: 40px;
+  filter: drop-shadow(2px 2px 10px black);
+  cursor: pointer;
+}
+
+#willie-pic:hover {
+  filter: drop-shadow(2px 2px 30px black);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  /* background-color: rgba(128, 128, 128, 0.083); */
+  gap: 40px;
+}
+
+main h1 {
+  color: black;
+
+  font-size: 30px;
+}
+main section {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 40px;
+  width: 50%;
+}
+
+.gameBoxText {
+  display: none;
+}
+
+.main-box {
+  border: 2px solid rgba(0, 0, 0, 0.48);
+  margin: 10px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px black;
+}
+
+main section button {
+  width: 200px;
+  border-radius: 20px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  padding: 12px;
+  transition: all ease-in-out 0.2s;
+}
+
+.button-box {
+  display: flex;
+  justify-content: center;
+}
+
+main section .playNowButton:hover {
+  background-color: black;
+  color: white;
+  transition: all ease-in-out 0.2s;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  border-top: 2px solid black;
+  padding: 10px;
+}
+
+@media (min-width: 900px) {
+  header .navBar1 a {
+    display: inline-block;
+  }
+
+  header p {
+    font-size: 26px;
+  }
+
+  main {
+    flex-direction: row;
+  }
+
+  header .navBar1 a:hover {
+    color: yellow;
+
+    text-shadow: 2px 2px black, 4px 4px rgb(101, 101, 101);
+  }
+
+  header .fa-bars,
+  header .fa-xmark {
+    display: none;
+  }
+
+  .fa-bars,
+  .fa-xmark {
+    display: none;
+  }
+
+  header .navBar1 a {
+    text-decoration: none;
+    gap: 20px;
+    font-size: 20px;
+  }
+
+  #willie-pic {
+    width: 400px;
+  }
+
+  header nav span {
+    color: white;
+    align-items: center;
+  }
+
+  header .navBar2 {
+    display: none;
+  }
+
+  .charatersInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .charaterBox1,
+  .charaterBox2 {
+    display: flex;
+    gap: 30px;
+  }
+  .charaterBox1 button,
+  .charaterBox2 button {
+    width: 270px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
+    border: 2px solid blacks;
+    display: flex;
+    justify-content: space-between;
+  }
+}
