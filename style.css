@@ -54,19 +54,20 @@ body {
 }
 
 .jump {
-  animation: jump 1s linear;
+  animation: jump 800ms linear;
 }
 
 @keyframes jump {
   0% {
-    transform: translateY(-120px);
+    transform: translateY(0);
   }
   30% {
     transform: translateY(-200px);
   }
   70% {
-    transform: translateY(-100px);
+    transform: translateY(-90px);
   }
+
   100% {
     transform: translateY(0);
   }
@@ -732,6 +733,7 @@ h3 {
   body {
     animation: moveBackground 30s linear infinite;
   }
+
   #back-to-start-menu-button {
     transform: scale(0.6);
   }

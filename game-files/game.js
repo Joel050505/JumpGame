@@ -650,13 +650,16 @@ playBtn.addEventListener("click", (e) => {
 
 triggerJump.addEventListener("click", () => {
   if (!sprite.classList.contains("jump")) {
-    sprite.classList.add("jump");
+    requestAnimationFrame(() => {
+      sprite.classList.add("jump");
+    });
+
     playSound(jumpSound);
     jumpSound.volume = 0.05;
 
     setTimeout(() => {
       sprite.classList.remove("jump");
-    }, 1000);
+    }, 800);
   }
 });
 
@@ -668,7 +671,7 @@ triggerJump.addEventListener("keydown", (e) => {
 
     setTimeout(() => {
       sprite.classList.remove("jump");
-    }, 1000);
+    }, 800);
   }
 });
 

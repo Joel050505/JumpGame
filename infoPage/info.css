@@ -165,7 +165,6 @@ h2 {
 
   header .navBar1 a:hover {
     color: yellow;
-
     text-shadow: 2px 2px black, 4px 4px rgb(101, 101, 101);
   }
 
