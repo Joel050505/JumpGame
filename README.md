@@ -1,5 +1,5 @@
 
-# 🐇 Chase the Rabbit 🐉
+# 👟Willie the runner👟
 
 Welcome to Chase Willie the runner, a fun and engaging game inspired by infinity running games that work both on mobile and desktop. This project was built by a student from Chas Academy while learning Javascript, Html and CSS. The game challenges players to jump over an obstacle, purchase characters, and track their high scores. The higher the score is the faster the game speed is so its the further you run down. This project mainly focused on game mechanics with DOM manipulation and javascript.
 
