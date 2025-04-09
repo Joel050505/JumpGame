@@ -19,7 +19,7 @@ Welcome to Chase Willie the runner, a fun and engaging game inspired by infinity
 
 - **CSS** – CSS for styling.
 
-- **HTML* – For layout.
+- **HTML** – For layout.
   
 ## Currently deployed
 - **Live at Vercel:** <a href="https://jump-game-chi.vercel.app/" target="_blank">Live</a>
