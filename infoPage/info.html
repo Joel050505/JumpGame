@@ -3,98 +3,164 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Willie the Runner - Game Information</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" href="/pictures/favicon-16x16.ico" type="image/x-icon" />
     <link rel="stylesheet" href="info.css" />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <header>
-      <p href="#">Willie The Runner</p>
+    <div class="cursor"></div>
 
-      <nav class="navBar1">
-        <a href="#">Game <span>|</span></a>
-        <a href="#">Socials <span>|</span></a>
-        <a href="#">Info</a>
-      </nav>
+    <nav class="nav" id="top">
+      <a href="#" class="nav-brand">
+        <i class="fas fa-running"></i>
+        <span>WILLIE</span>
+      </a>
+      <div class="nav-links">
+        <a href="#top" class="nav-link">Home</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#gameplay" class="nav-link">Gameplay</a>
 
-      <nav class="navBar2">
-        <a href="info.html">Game</a>
-        <a href="">Socials</a>
-        <a href="">Info</a>
-      </nav>
-
-      <i class="fa-solid fa-bars"></i>
-      <i class="fa-solid fa-xmark"></i>
-    </header>
-
-    <main>
-      <div class="main-box">
-        <img
-          id="willie-pic"
-          src="/pictures/New Piskel (1) (2).png"
-          alt=""
-          width="400"
-        />
+        <button id="modeToggle" class="mode-toggle">
+          <i class="fas fa-moon"></i>
+        </button>
       </div>
-      <section>
-        <h1>Wille the runner</h1>
-        <p>
-          Willie the runner is a infinity running game. Your goal is to jump
-          over coming obstacles.
-        </p>
-        <div class="button-box">
-          <a href="/index.html">
-            <button class="playNowButton">Play now</button>
-          </a>
-        </div>
-      </section>
-    </main>
+    </nav>
 
-    <h2>Game</h2>
+    <section class="hero">
+      <div class="hero-background"></div>
+      <div class="hero-grid"></div>
 
-    <section class="charatersInfo">
-      <div class="charaterBox1">
-        <div>
-          <button>
-            Rules <span><i class="fa-solid fa-angle-down"></i></span>
-          </button>
-        </div>
-        <div>
-          <button>Coins <i class="fa-solid fa-angle-down"></i></button>
-        </div>
-        <div>
-          <button>Mission <i class="fa-solid fa-angle-down"></i></button>
-        </div>
+      <div class="coin" style="top: 20%; left: 15%"></div>
+      <div class="coin" style="top: 70%; left: 80%"></div>
+      <div class="coin" style="top: 30%; left: 75%"></div>
+      <div class="coin" style="top: 65%; left: 25%"></div>
+
+      <div class="hero-content">
+        <h1 class="logo">WILLIE THE RUNNER</h1>
+        <p class="tagline">Run. Collect. Challenge. Conquer.</p>
+        <a href="../index.html" class="cta-button">PLAY NOW</a>
       </div>
 
-      <div class="charaterBox2">
-        <div>
-          <button>
-            Characters <span><i class="fa-solid fa-angle-down"></i></span>
-          </button>
-        </div>
-        <div>
-          <button>
-            Mission <span><i class="fa-solid fa-angle-down"></i></span>
-          </button>
-        </div>
-        <div>
-          <button>
-            Highscore <span><i class="fa-solid fa-angle-down"></i></span>
-          </button>
+      <div class="scroll-indicator">
+        <p>Scroll Down</p>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="features-background"></div>
+      <div class="container">
+        <h2 class="section-title">Game Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card parallax">
+            <div class="feature-icon">
+              <i class="fas fa-coins"></i>
+            </div>
+            <h3>Coin Collection</h3>
+            <p>
+              Collect coins throughout your journey to unlock new abilities,
+              character customizations, and gain access to an exclusive city.
+            </p>
+          </div>
+          <div class="feature-card parallax">
+            <div class="feature-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h3>Exciting Challenges</h3>
+            <p>
+              Test your skills with diverse challenges designed to push your
+              limits. Complete time trials, precision runs, and special missions
+              to earn rewards.
+            </p>
+          </div>
+          <div class="feature-card parallax">
+            <div class="feature-icon">
+              <i class="fas fa-level-up-alt"></i>
+            </div>
+            <h3>Level Progression</h3>
+            <p>
+              Gain experience and level up Willie's abilities. Making him
+              happier, stronger, and more agile. Unlock new characters and
+              levels, and overcome increasingly difficult obstacles.
+            </p>
+          </div>
+          <div class="feature-card parallax">
+            <div class="feature-icon">
+              <i class="fas fa-moon"></i>
+            </div>
+            <h3>Day & Night Modes</h3>
+            <p>
+              Experience the game in two distinct atmospheres. Switch between
+              day and night modes to discover different mechanics, and
+              collectibles that transform the gameplay experience.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <script src="info.js"></script>
+    <section id="gameplay" class="gameplay">
+      <div class="container">
+        <h2 class="section-title">Gameplay</h2>
+        <div class="gameplay-grid">
+          <div class="gameplay-card parallax">
+            <div class="gameplay-image day">
+              <div class="gameplay-image-content">
+                <i class="fas fa-sun"></i> Day Mode
+              </div>
+            </div>
+            <div class="gameplay-content">
+              <h3>Day Mode</h3>
+              <p>
+                Run through vibrant, sun-drenched environments where visibility
+                is perfect but challenges are tougher. The daylight illuminates
+                every corner of the world, revealing hidden paths and special
+                collectibles.
+              </p>
+              <ul class="gameplay-features">
+                <li>More visible obstacles and enemies</li>
+                <li>Special day-only gold coins</li>
+                <li>Unique day-time power-ups</li>
+                <li>Brighter, more colorful environments</li>
+              </ul>
+            </div>
+          </div>
+          <div class="gameplay-card parallax">
+            <div class="gameplay-image night">
+              <div class="gameplay-image-content">
+                <i class="fas fa-moon"></i> Night Mode
+              </div>
+            </div>
+            <div class="gameplay-content">
+              <h3>Night Mode</h3>
+              <p>
+                As darkness falls, the game world transforms completely.
+                Navigate through shadowy landscapes with limited visibility,
+                where new nocturnal challenges await and glowing elements guide
+                your path.
+              </p>
+              <ul class="gameplay-features">
+                <li>Glowing rare collectibles worth more points</li>
+                <li>Ste</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("nav");
+        if (window.scrollY > 100) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+    </script>
   </body>
 </html>
